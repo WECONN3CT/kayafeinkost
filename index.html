@@ -2091,9 +2091,9 @@
                 x: 0,
                 y: 0,
                 z: -2,
-                rotX: 0.1,
+                rotX: Math.PI / 2,
                 rotY: 0,
-                rotZ: 0.05,
+                rotZ: 0,
                 scale: 4.5,
                 opacity: 0
             };
@@ -2167,17 +2167,8 @@
 
                 // Gentle floating in hero (subtle)
                 gsap.to(oliveState, {
-                    y: '+=0.2',
+                    y: '+=0.15',
                     duration: 4,
-                    ease: 'sine.inOut',
-                    yoyo: true,
-                    repeat: -1
-                });
-
-                gsap.to(oliveState, {
-                    rotZ: '+=0.02',
-                    rotY: '+=0.03',
-                    duration: 6,
                     ease: 'sine.inOut',
                     yoyo: true,
                     repeat: -1
@@ -2203,8 +2194,7 @@
                     x: -2.5,
                     y: -1.5,
                     z: 1,
-                    rotY: Math.PI * 1.5,
-                    rotX: 0.15,
+                    rotX: Math.PI / 2.5,
                     rotZ: -0.1,
                     scale: 2,
                     duration: 1,
@@ -2229,8 +2219,7 @@
                     x: -3.8,
                     y: -0.8,
                     z: 0.5,
-                    rotY: Math.PI * 2,
-                    rotX: -0.05,
+                    rotX: Math.PI / 3,
                     rotZ: 0.05,
                     scale: 1,
                     duration: 1,
@@ -2253,7 +2242,7 @@
 
                 settleTimeline.to(oliveState, {
                     scale: 0.7,
-                    rotY: Math.PI * 2.3,
+                    rotX: Math.PI / 4,
                     y: '-=0.2',
                     duration: 1,
                     ease: 'none'
@@ -2278,7 +2267,7 @@
                     scale: 0.4,
                     x: -4.5,
                     y: 1,
-                    rotY: Math.PI * 2.8,
+                    rotX: Math.PI / 6,
                     duration: 1,
                     ease: 'none'
                 });
@@ -2286,18 +2275,16 @@
 
             // Animation Loop
             const clock = new THREE.Clock();
+            let rotationSpeed = 0.003; // Slow continuous rotation
 
             function animate() {
                 requestAnimationFrame(animate);
 
                 if (modelLoaded) {
-                    updateModel();
+                    // Slow continuous rotation around Y axis
+                    oliveState.rotY += rotationSpeed;
 
-                    // Subtle breathing motion
-                    const time = clock.getElapsedTime();
-                    if (oliveBranch) {
-                        oliveBranch.rotation.y += Math.sin(time * 0.3) * 0.0005;
-                    }
+                    updateModel();
                 }
 
                 renderer.render(scene, camera);
