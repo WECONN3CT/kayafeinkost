@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt & Standorte | Kaya Feinkost</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDFBF7;
+            --sage: #7A9E7E;
+            --sage-light: #A8C5AB;
+            --sage-dark: #5C7A5F;
+            --wood: #C4A574;
+            --wood-dark: #8B6F47;
+            --wood-light: #E8D5B5;
+            --wood-medium: #A67C52;
+            --charcoal: #2D2D2D;
+            --text: #3A3A3A;
+            --text-light: #6B6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        nav.scrolled {
+            padding: 1rem 4rem;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .logo span {
+            color: var(--sage);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--sage);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--sage);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 12rem 4rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, var(--sage-light) 0%, transparent 70%);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Locations Section */
+        .locations-section {
+            padding: 4rem 4rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .locations-section h2 {
+            font-size: 3rem;
+            color: var(--charcoal);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .locations-section h2 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .locations-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--sage), var(--sage-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .location-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .location-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+        }
+
+        .location-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .location-card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .location-card-header h3 {
+            font-size: 2rem;
+            color: var(--charcoal);
+        }
+
+        .location-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .location-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .location-detail-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .location-detail-content h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 0.2rem;
+        }
+
+        .location-detail-content p {
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .location-detail-content a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .location-detail-content a:hover {
+            color: var(--sage);
+        }
+
+        .location-card-actions {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--wood-light);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .location-btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .location-btn.primary {
+            background: var(--sage);
+            color: white;
+        }
+
+        .location-btn.primary:hover {
+            background: var(--sage-dark);
+            transform: translateY(-2px);
+        }
+
+        .location-btn.secondary {
+            background: var(--cream);
+            color: var(--sage-dark);
+            border: 1px solid var(--sage-light);
+        }
+
+        .location-btn.secondary:hover {
+            background: var(--sage-light);
+            color: white;
+        }
+
+        /* Opening Hours Banner */
+        .hours-banner {
+            background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+            padding: 3rem 4rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hours-banner h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hours-banner p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        .hours-banner .hours-note {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: 6rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form-section h2 {
+            font-size: 3rem;
+            color: var(--charcoal);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form-section h2 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .contact-form-section > p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--wood-dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--cream);
+            border: 1px solid var(--wood-light);
+            border-radius: 10px;
+            color: var(--charcoal);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--sage);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(122, 158, 126, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--sage);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--sage-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(122, 158, 126, 0.4);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 4rem;
+            background: linear-gradient(180deg, transparent, rgba(196, 165, 116, 0.1), transparent);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-header h2 {
+            font-size: 3rem;
+            color: var(--charcoal);
+        }
+
+        .faq-header h2 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--cream);
+        }
+
+        .faq-question h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--charcoal);
+        }
+
+        .faq-toggle {
+            width: 30px;
+            height: 30px;
+            background: var(--sage-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sage-dark);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--sage);
+            color: white;
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage), var(--sage-light), var(--sage));
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #FDF8F3;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .footer-logo span {
+            color: var(--sage-light);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links a {
+            color: rgba(253, 248, 243, 0.8);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .footer-links a:hover {
+            color: var(--sage-light);
+        }
+
+        .footer-copy {
+            color: rgba(253, 248, 243, 0.6);
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header,
+            .locations-section,
+            .contact-form-section,
+            .faq-section {
+                padding: 4rem 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-container {
+                padding: 2rem;
+            }
+
+            .location-card {
+                padding: 2rem;
+            }
+
+            .location-card-actions {
+                flex-direction: column;
+            }
+
+            .hours-banner {
+                padding: 2rem;
+            }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Kaya <span>Feinkost</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="spezialitaeten.html">Spezialitäten</a></li>
+            <li><a href="qualitaet.html">Qualität</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html" class="active">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Unsere <span>Standorte</span></h1>
+        <p>Besuchen Sie uns an einem unserer vier Standorte in Ihrer Nähe.</p>
+    </header>
+
+    <!-- Locations Section -->
+    <section class="locations-section">
+        <h2>4x für Sie <span>da</span></h2>
+        <p class="locations-subtitle">Frische Döner & Pasta an jedem Standort</p>
+
+        <div class="locations-grid">
+            <!-- Dormagen -->
+            <div class="location-card reveal">
+                <div class="location-card-header">
+                    <div class="location-card-icon">📍</div>
+                    <h3>Dormagen</h3>
+                </div>
+                <div class="location-details">
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-content">
+                            <h4>Adresse</h4>
+                            <p>Lübeckerstr. 1<br>41539 Dormagen</p>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-content">
+                            <h4>Öffnungszeiten</h4>
+                            <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card-actions">
+                    <a href="https://maps.google.com/?q=Lübeckerstr.+1,+Dormagen" target="_blank" class="location-btn primary">
+                        Route planen
+                    </a>
+                    <a href="tel:+49" class="location-btn secondary">
+                        Anrufen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Euskirchen -->
+            <div class="location-card reveal">
+                <div class="location-card-header">
+                    <div class="location-card-icon">📍</div>
+                    <h3>Euskirchen</h3>
+                </div>
+                <div class="location-details">
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-content">
+                            <h4>Adresse</h4>
+                            <p>Roitzheimerstr. 117<br>53879 Euskirchen</p>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-content">
+                            <h4>Öffnungszeiten</h4>
+                            <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card-actions">
+                    <a href="https://maps.google.com/?q=Roitzheimerstr.+117,+Euskirchen" target="_blank" class="location-btn primary">
+                        Route planen
+                    </a>
+                    <a href="tel:+49" class="location-btn secondary">
+                        Anrufen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Troisdorf -->
+            <div class="location-card reveal">
+                <div class="location-card-header">
+                    <div class="location-card-icon">📍</div>
+                    <h3>Troisdorf</h3>
+                </div>
+                <div class="location-details">
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-content">
+                            <h4>Adresse</h4>
+                            <p>Speicherstr. 101<br>53840 Troisdorf</p>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-content">
+                            <h4>Öffnungszeiten</h4>
+                            <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card-actions">
+                    <a href="https://maps.google.com/?q=Speicherstr.+101,+Troisdorf" target="_blank" class="location-btn primary">
+                        Route planen
+                    </a>
+                    <a href="tel:+49" class="location-btn secondary">
+                        Anrufen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sankt Augustin -->
+            <div class="location-card reveal">
+                <div class="location-card-header">
+                    <div class="location-card-icon">📍</div>
+                    <h3>Sankt Augustin</h3>
+                </div>
+                <div class="location-details">
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-content">
+                            <h4>Adresse</h4>
+                            <p>Rathausallee 15<br>53757 Sankt Augustin</p>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-content">
+                            <h4>Öffnungszeiten</h4>
+                            <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card-actions">
+                    <a href="https://maps.google.com/?q=Rathausallee+15,+Sankt+Augustin" target="_blank" class="location-btn primary">
+                        Route planen
+                    </a>
+                    <a href="tel:+49" class="location-btn secondary">
+                        Anrufen
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opening Hours Banner -->
+    <div class="hours-banner">
+        <h3>Öffnungszeiten</h3>
+        <p>Montag bis Samstag: 11:00 - 22:00 Uhr</p>
+        <p class="hours-note">Sonntags geschlossen. An Feiertagen können die Zeiten abweichen.</p>
+    </div>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <h2>Schreiben Sie <span>uns</span></h2>
+        <p>Haben Sie Fragen, Anregungen oder möchten Sie einen Tisch reservieren?</p>
+
+        <div class="contact-form-container reveal">
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Vorname</label>
+                        <input type="text" placeholder="Ihr Vorname">
+                    </div>
+                    <div class="form-group">
+                        <label>Nachname</label>
+                        <input type="text" placeholder="Ihr Nachname">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="email" placeholder="ihre@email.de">
+                    </div>
+                    <div class="form-group">
+                        <label>Standort</label>
+                        <select>
+                            <option value="">Standort wählen...</option>
+                            <option value="dormagen">Dormagen</option>
+                            <option value="euskirchen">Euskirchen</option>
+                            <option value="troisdorf">Troisdorf</option>
+                            <option value="sankt-augustin">Sankt Augustin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Betreff</label>
+                    <select>
+                        <option value="">Bitte wählen...</option>
+                        <option value="reservation">Tischreservierung</option>
+                        <option value="catering">Catering-Anfrage</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Sonstiges</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nachricht</label>
+                    <textarea placeholder="Ihre Nachricht an uns..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    Nachricht senden
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="faq-header reveal">
+                <h2>Häufige <span>Fragen</span></h2>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h4>Kann ich einen Tisch reservieren?</h4>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Ja, Tischreservierungen sind telefonisch oder über unser Kontaktformular möglich. Wir empfehlen eine Reservierung besonders am Wochenende.</p>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h4>Bieten Sie auch Catering an?</h4>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Ja, wir bieten Catering für Veranstaltungen aller Größen an. Kontaktieren Sie uns für ein individuelles Angebot – wir beraten Sie gerne!</p>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h4>Gibt es vegetarische/vegane Optionen?</h4>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Selbstverständlich! Wir haben eine große Auswahl an vegetarischen und veganen Gerichten. Diese sind in unserer Speisekarte entsprechend gekennzeichnet.</p>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h4>Ist eine Abholung möglich?</h4>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Ja, Sie können Ihre Bestellung telefonisch aufgeben und bei uns abholen. Bitte rechnen Sie mit ca. 15-20 Minuten Zubereitungszeit.</p>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question">
+                    <h4>Akzeptieren Sie Kartenzahlung?</h4>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Ja, wir akzeptieren alle gängigen Kredit- und Debitkarten sowie kontaktlose Zahlung und mobile Bezahlmethoden wie Apple Pay und Google Pay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: url('images/holzdunkel.png') center/cover no-repeat;">
+        <div class="footer-logo">Kaya <span>Feinkost</span></div>
+        <div class="footer-links">
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+        </div>
+        <p class="footer-copy">© 2025 Kaya Feinkost. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script>
+        // Initialize Lenis for smooth scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            smoothWheel: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Nav scroll effect
+        ScrollTrigger.create({
+            start: 'top -80',
+            end: 99999,
+            toggleClass: { className: 'scrolled', targets: 'nav' }
+        });
+
+        // Page Header Animation
+        gsap.from('.page-header h1', {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.page-header p', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: 'power3.out'
+        });
+
+        // Locations Section
+        gsap.from('.locations-section h2', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.locations-section',
+                start: 'top 80%',
+            }
+        });
+
+        gsap.to('.location-card', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.locations-grid',
+                start: 'top 85%',
+            }
+        });
+
+        // Hours Banner
+        gsap.from('.hours-banner', {
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.hours-banner',
+                start: 'top 85%',
+            }
+        });
+
+        // Contact Form
+        gsap.to('.contact-form-container', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.contact-form-section',
+                start: 'top 75%',
+            }
+        });
+
+        // FAQ Section
+        gsap.to('.faq-header', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.faq-section',
+                start: 'top 80%',
+            }
+        });
+
+        gsap.to('.faq-item', {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.faq-container',
+                start: 'top 80%',
+            }
+        });
+
+        // FAQ Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                faqItems.forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove('active');
+                    }
+                });
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

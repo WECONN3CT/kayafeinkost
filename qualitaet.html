@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualität | Kaya Feinkost</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDFBF7;
+            --sage: #7A9E7E;
+            --sage-light: #A8C5AB;
+            --sage-dark: #5C7A5F;
+            --wood: #C4A574;
+            --wood-dark: #8B6F47;
+            --wood-light: #E8D5B5;
+            --wood-medium: #A67C52;
+            --charcoal: #2D2D2D;
+            --text: #3A3A3A;
+            --text-light: #6B6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        nav.scrolled {
+            padding: 1rem 4rem;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .logo span {
+            color: var(--sage);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--sage);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--sage);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 12rem 4rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, var(--sage-light) 0%, transparent 70%);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Promise Section */
+        .promise-section {
+            padding: 6rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .promise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .promise-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+
+        .promise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage), var(--wood));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .promise-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .promise-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .promise-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .promise-icon::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border: 1px dashed var(--sage-light);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .promise-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+
+        .promise-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Ingredients Section */
+        .ingredients-section {
+            padding: 6rem 4rem;
+            background: linear-gradient(180deg, transparent, rgba(168, 197, 171, 0.1), transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            color: var(--charcoal);
+        }
+
+        .section-header h2 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ingredient-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            transition: transform 0.4s ease;
+        }
+
+        .ingredient-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .ingredient-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--sage-light), var(--sage));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .ingredient-video {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ingredient-video video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .ingredient-video-zoom-out video {
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        .ingredient-content {
+            padding: 2rem;
+        }
+
+        .ingredient-content h3 {
+            font-size: 1.4rem;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .ingredient-tag {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.4rem 1rem;
+            background: var(--sage-light);
+            color: var(--sage-dark);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Process Section - Horizontal Scroll */
+        .process-section {
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+
+        .process-wrapper {
+            position: relative;
+            padding: 3rem 0 6rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .process-header {
+            text-align: center;
+            padding: 0 4rem 4rem;
+        }
+
+        .process-header h2 {
+            font-size: 3.5rem;
+            color: var(--charcoal);
+        }
+
+        .process-header h2 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .process-header p {
+            color: var(--text-light);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .process-horizontal {
+            display: flex;
+            width: fit-content;
+            padding: 0 10vw;
+            gap: 2rem;
+        }
+
+        .process-card {
+            flex-shrink: 0;
+            width: 450px;
+            max-width: 80vw;
+            height: auto;
+            min-height: 380px;
+            background: var(--cream);
+            border: 1px solid var(--wood-light);
+            border-radius: 30px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+
+        .process-card:hover {
+            box-shadow: 0 25px 70px rgba(0,0,0,0.12);
+            transform: translateY(-5px);
+        }
+
+        .process-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage), var(--sage-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .process-card.active::before {
+            transform: scaleX(1);
+        }
+
+        .process-card-number {
+            position: absolute;
+            top: -15px;
+            right: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 10rem;
+            font-weight: 600;
+            color: rgba(122, 158, 126, 0.12);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        /* Progress Bar */
+        .process-progress {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .progress-line {
+            width: 200px;
+            height: 3px;
+            background: var(--wood-light);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--sage);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--wood-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .progress-dot.active {
+            background: var(--sage);
+            transform: scale(1.2);
+        }
+
+        .process-card-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(122, 158, 126, 0.3);
+            overflow: hidden;
+        }
+
+        .process-card-icon-video {
+            padding: 0;
+        }
+
+        .process-card-icon-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .process-card-step {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 1rem;
+        }
+
+        .process-card h3 {
+            font-size: 2.2rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .process-card p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Scroll Hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            right: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        .scroll-hint-arrow {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--wood-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounceRight 1.5s ease infinite;
+            color: var(--sage);
+        }
+
+        @keyframes bounceRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        @media (max-width: 768px) {
+            .process-card {
+                width: 85vw;
+                min-height: 350px;
+                padding: 2rem;
+            }
+
+            .process-card-number {
+                font-size: 7rem;
+                top: -10px;
+                right: 15px;
+            }
+
+            .process-card h3 {
+                font-size: 1.8rem;
+            }
+
+            .process-card-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+                border-radius: 20px;
+                margin-bottom: 1.5rem;
+            }
+
+            .scroll-hint {
+                display: none;
+            }
+
+            .process-progress {
+                bottom: 2rem;
+            }
+
+            .progress-line {
+                width: 120px;
+            }
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            padding: 6rem 4rem;
+            background: linear-gradient(180deg, transparent, rgba(196, 165, 116, 0.1), transparent);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .certification-card {
+            height: 280px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .certification-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        .certification-front,
+        .certification-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* Glassmorphism */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.4s ease;
+        }
+
+        .certification-card:hover .certification-front {
+            box-shadow: 0 0 40px rgba(122, 158, 126, 0.4), 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .certification-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(145deg, rgba(122, 158, 126, 0.95), rgba(92, 122, 95, 0.98));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: white;
+        }
+
+        .certification-card:hover .certification-back {
+            box-shadow: 0 0 50px rgba(122, 158, 126, 0.6), 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .certification-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--sage-light), var(--sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(122, 158, 126, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .certification-front::after {
+            content: 'Hover für Details';
+            position: absolute;
+            bottom: 15px;
+            font-size: 0.7rem;
+            color: var(--sage);
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .certification-card:hover .certification-front::after {
+            opacity: 0;
+        }
+
+        .certification-front h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .certification-front p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .certification-back h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .certification-back p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .certification-back-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 6rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--sage);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Sustainability Section */
+        .sustainability-section {
+            padding: 6rem 4rem;
+        }
+
+        .sustainability-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .sustainability-image {
+            height: 500px;
+            background: linear-gradient(145deg, var(--sage-light), var(--wood-light));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sustainability-image img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .sustainability-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+        }
+
+        .sustainability-text h2 {
+            font-size: 3rem;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .sustainability-text h2 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .sustainability-text p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sustainability-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .sustainability-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .sustainability-list li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--sage-light);
+            color: var(--sage-dark);
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 4rem;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem;
+            background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+            border-radius: 30px;
+            color: white;
+        }
+
+        .cta-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: var(--sage-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage), var(--sage-light), var(--sage));
+        }
+
+        .wood-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #FDF8F3;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .footer-logo span {
+            color: var(--sage-light);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links a {
+            color: rgba(253, 248, 243, 0.8);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .footer-links a:hover {
+            color: var(--sage-light);
+        }
+
+        .footer-copy {
+            color: rgba(253, 248, 243, 0.6);
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .promise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certifications-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sustainability-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sustainability-image {
+                height: 350px;
+            }
+
+            .process-timeline::before {
+                left: 30px;
+            }
+
+            .process-step,
+            .process-step:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .process-number {
+                left: 30px;
+                position: absolute;
+            }
+
+            .process-content,
+            .process-step:nth-child(even) .process-content {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .process-icon {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header,
+            .promise-section,
+            .ingredients-section,
+            .process-section,
+            .certifications-section,
+            .stats-section,
+            .sustainability-section,
+            .cta-section {
+                padding: 4rem 2rem;
+            }
+
+            .certifications-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .certification-card {
+                height: 240px;
+            }
+
+            .certification-back p {
+                font-size: 0.85rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        /* Falling Leaf Path */
+        .leaf-path-svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        /* Falling Leaf */
+        .falling-leaf {
+            position: fixed;
+            width: 55px;
+            height: 70px;
+            z-index: 100;
+            pointer-events: none;
+            will-change: transform;
+            transform-origin: center center;
+        }
+
+        .falling-leaf svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.15));
+        }
+
+        @media (max-width: 768px) {
+            .falling-leaf {
+                width: 40px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Falling Leaf Path (hidden) -->
+    <svg class="leaf-path-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path id="leafPath" d="
+            M 75 28
+            C 82 35, 45 38, 35 45
+            C 25 52, 78 58, 85 65
+            C 90 72, 20 78, 15 85
+            C 10 92, 82 95, 87 102
+            C 90 109, 25 112, 18 118
+            C 12 124, 52 128, 48 135
+        " fill="none" stroke="none"/>
+    </svg>
+
+    <!-- Falling Leaf Animation -->
+    <div class="falling-leaf" id="fallingLeaf">
+        <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <!-- Realistic multi-stop gradient -->
+                <linearGradient id="leafMain" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#7CB342"/>
+                    <stop offset="25%" style="stop-color:#8BC34A"/>
+                    <stop offset="50%" style="stop-color:#689F38"/>
+                    <stop offset="75%" style="stop-color:#558B2F"/>
+                    <stop offset="100%" style="stop-color:#33691E"/>
+                </linearGradient>
+
+                <!-- Light reflection gradient -->
+                <radialGradient id="leafShine" cx="30%" cy="20%" r="50%" fx="30%" fy="20%">
+                    <stop offset="0%" style="stop-color:#C5E1A5;stop-opacity:0.7"/>
+                    <stop offset="40%" style="stop-color:#AED581;stop-opacity:0.3"/>
+                    <stop offset="100%" style="stop-color:#8BC34A;stop-opacity:0"/>
+                </radialGradient>
+
+                <!-- Dark edge gradient -->
+                <linearGradient id="leafEdge" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:0.4"/>
+                    <stop offset="50%" style="stop-color:#388E3C;stop-opacity:0"/>
+                    <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:0.4"/>
+                </linearGradient>
+
+                <!-- Vein gradient -->
+                <linearGradient id="veinGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#558B2F;stop-opacity:0.8"/>
+                    <stop offset="50%" style="stop-color:#689F38;stop-opacity:0.6"/>
+                    <stop offset="100%" style="stop-color:#558B2F;stop-opacity:0.8"/>
+                </linearGradient>
+
+                <!-- Realistic shadow -->
+                <filter id="leafShadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+                    <feOffset in="blur" dx="5" dy="8" result="offsetBlur"/>
+                    <feFlood flood-color="#1a1a1a" flood-opacity="0.4"/>
+                    <feComposite in2="offsetBlur" operator="in"/>
+                    <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+
+                <!-- Subtle texture -->
+                <filter id="leafTexture">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+                    <feDiffuseLighting in="noise" lighting-color="#8BC34A" surfaceScale="1.5" result="light">
+                        <feDistantLight azimuth="45" elevation="60"/>
+                    </feDiffuseLighting>
+                    <feBlend in="SourceGraphic" in2="light" mode="overlay"/>
+                </filter>
+            </defs>
+
+            <!-- Leaf shadow layer -->
+            <ellipse cx="52" cy="108" rx="18" ry="4" fill="#1B5E20" opacity="0.15"/>
+
+            <!-- Main leaf shape - serrated mint/basil leaf -->
+            <path d="M50 5
+                     C54 6, 58 8, 62 12
+                     L65 10 C68 14, 72 18, 75 24
+                     L78 22 C81 28, 84 34, 86 42
+                     L89 40 C90 48, 90 56, 88 64
+                     L91 63 C89 72, 86 78, 82 84
+                     L84 87 C78 92, 72 96, 65 99
+                     L66 102 C60 104, 55 105, 50 106
+                     C45 105, 40 104, 34 102
+                     L35 99 C28 96, 22 92, 16 87
+                     L18 84 C14 78, 11 72, 9 63
+                     L12 64 C10 56, 10 48, 11 40
+                     L14 42 C16 34, 19 28, 22 22
+                     L25 24 C28 18, 32 14, 35 10
+                     L38 12 C42 8, 46 6, 50 5Z"
+                  fill="url(#leafMain)"
+                  filter="url(#leafShadow)"/>
+
+            <!-- Leaf edge darkening -->
+            <path d="M50 5
+                     C54 6, 58 8, 62 12
+                     L65 10 C68 14, 72 18, 75 24
+                     L78 22 C81 28, 84 34, 86 42
+                     L89 40 C90 48, 90 56, 88 64
+                     L91 63 C89 72, 86 78, 82 84
+                     L84 87 C78 92, 72 96, 65 99
+                     L66 102 C60 104, 55 105, 50 106
+                     C45 105, 40 104, 34 102
+                     L35 99 C28 96, 22 92, 16 87
+                     L18 84 C14 78, 11 72, 9 63
+                     L12 64 C10 56, 10 48, 11 40
+                     L14 42 C16 34, 19 28, 22 22
+                     L25 24 C28 18, 32 14, 35 10
+                     L38 12 C42 8, 46 6, 50 5Z"
+                  fill="url(#leafEdge)"
+                  opacity="0.5"/>
+
+            <!-- Light reflection/shine -->
+            <path d="M50 10
+                     C56 12, 65 18, 72 28
+                     C68 24, 58 16, 50 14
+                     C42 16, 34 22, 28 28
+                     C35 18, 44 12, 50 10Z"
+                  fill="url(#leafShine)"/>
+
+            <!-- Secondary shine -->
+            <ellipse cx="38" cy="35" rx="10" ry="15" fill="#C5E1A5" opacity="0.2" transform="rotate(-20 38 35)"/>
+
+            <!-- Central vein - thicker, more natural -->
+            <path d="M50 14
+                     Q51 30, 50 50
+                     Q49 70, 50 95"
+                  stroke="url(#veinGrad)"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Central vein highlight -->
+            <path d="M50 14
+                     Q51 30, 50 50
+                     Q49 70, 50 95"
+                  stroke="#AED581"
+                  stroke-width="1"
+                  fill="none"
+                  stroke-linecap="round"
+                  opacity="0.4"/>
+
+            <!-- Side veins left - curved naturally -->
+            <path d="M50 24 Q42 28, 28 30" stroke="#558B2F" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M48 24 Q40 30, 24 35" stroke="#558B2F" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+            <path d="M50 38 Q40 44, 22 48" stroke="#558B2F" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M48 40 Q38 48, 20 55" stroke="#558B2F" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+            <path d="M50 54 Q38 62, 18 68" stroke="#558B2F" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M48 56 Q36 66, 20 75" stroke="#558B2F" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+            <path d="M50 70 Q40 78, 25 84" stroke="#558B2F" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.55"/>
+            <path d="M50 82 Q42 88, 32 92" stroke="#558B2F" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+            <!-- Side veins right - curved naturally -->
+            <path d="M50 24 Q58 28, 72 30" stroke="#558B2F" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M52 24 Q60 30, 76 35" stroke="#558B2F" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+            <path d="M50 38 Q60 44, 78 48" stroke="#558B2F" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M52 40 Q62 48, 80 55" stroke="#558B2F" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+            <path d="M50 54 Q62 62, 82 68" stroke="#558B2F" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <path d="M52 56 Q64 66, 80 75" stroke="#558B2F" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+            <path d="M50 70 Q60 78, 75 84" stroke="#558B2F" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.55"/>
+            <path d="M50 82 Q58 88, 68 92" stroke="#558B2F" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+            <!-- Stem -->
+            <path d="M50 105
+                     Q52 110, 50 115
+                     Q48 118, 50 120"
+                  stroke="#5D4037"
+                  stroke-width="4"
+                  fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Stem highlight -->
+            <path d="M49 106 Q50 112, 49 117"
+                  stroke="#8D6E63"
+                  stroke-width="1.5"
+                  fill="none"
+                  stroke-linecap="round"
+                  opacity="0.6"/>
+        </svg>
+    </div>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Kaya <span>Feinkost</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="spezialitaeten.html">Spezialitäten</a></li>
+            <li><a href="qualitaet.html" class="active">Qualität</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Unsere <span>Qualität</span></h1>
+        <p>Kompromisslos frisch, nachhaltig beschafft und mit Liebe zubereitet.</p>
+    </header>
+
+    <!-- Promise Section -->
+    <section class="promise-section">
+        <div class="promise-grid">
+            <div class="promise-card reveal">
+                <div class="promise-icon">🌿</div>
+                <h3>Frische Zutaten</h3>
+                <p>Täglich geliefert von ausgewählten regionalen Partnern. Wir setzen auf Qualität statt Quantität.</p>
+            </div>
+            <div class="promise-card reveal">
+                <div class="promise-icon">👨‍🍳</div>
+                <h3>Handgemacht</h3>
+                <p>Jedes Gericht wird nach traditionellen Rezepten von Hand zubereitet – mit Erfahrung und Leidenschaft.</p>
+            </div>
+            <div class="promise-card reveal">
+                <div class="promise-icon">♻️</div>
+                <h3>Nachhaltig</h3>
+                <p>Von der Verpackung bis zur Beschaffung – wir denken an die Zukunft und handeln verantwortungsvoll.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredients Section -->
+    <section class="ingredients-section">
+        <div class="section-header reveal">
+            <h2>Unsere <span>Zutaten</span></h2>
+            <p>Nur das Beste kommt auf Ihren Teller</p>
+        </div>
+        <div class="ingredients-grid">
+            <div class="ingredient-card reveal">
+                <div class="ingredient-image ingredient-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="videos/qualität/fleisch.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="ingredient-content">
+                    <h3>Premium Fleisch</h3>
+                    <p>Unser Dönerfleisch stammt von ausgewählten Höfen und wird nach traditioneller Art mariniert.</p>
+                    <span class="ingredient-tag">Regional</span>
+                </div>
+            </div>
+            <div class="ingredient-card reveal">
+                <div class="ingredient-image ingredient-video ingredient-video-zoom-out">
+                    <video autoplay muted loop playsinline>
+                        <source src="videos/qualität/gemüse.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="ingredient-content">
+                    <h3>Frisches Gemüse</h3>
+                    <p>Täglich frisch vom Markt – knackig, vitaminreich und voller natürlicher Aromen.</p>
+                    <span class="ingredient-tag">Täglich frisch</span>
+                </div>
+            </div>
+            <div class="ingredient-card reveal">
+                <div class="ingredient-image ingredient-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="videos/qualität/guacamole.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="ingredient-content">
+                    <h3>Hausgemachte Pasten</h3>
+                    <p>Unsere Pasten werden jeden Tag frisch aus hochwertigen Zutaten hergestellt.</p>
+                    <span class="ingredient-tag">Handgemacht</span>
+                </div>
+            </div>
+            <div class="ingredient-card reveal">
+                <div class="ingredient-image ingredient-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="videos/qualität/pasten.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="ingredient-content">
+                    <h3>Gewürze & Kräuter</h3>
+                    <p>Eine einzigartige Mischung aus orientalischen und mediterranen Gewürzen für den perfekten Geschmack.</p>
+                    <span class="ingredient-tag">Geheimrezept</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section - Horizontal Scroll -->
+    <section class="process-section" id="process">
+        <div class="process-wrapper">
+            <div class="process-header">
+                <h2>Unser <span>Prozess</span></h2>
+                <p>Von der Auswahl bis auf Ihren Teller</p>
+            </div>
+
+            <div class="process-horizontal">
+                <div class="process-card" data-step="1">
+                    <span class="process-card-number">01</span>
+                    <div class="process-card-icon process-card-icon-video">
+                        <video autoplay muted loop playsinline>
+                            <source src="videos/qualität/auswahl.mp4?v=2" type="video/mp4">
+                        </video>
+                    </div>
+                    <span class="process-card-step">Schritt 01</span>
+                    <h3>Sorgfältige Auswahl</h3>
+                    <p>Wir wählen nur die besten Zutaten von vertrauenswürdigen, regionalen Lieferanten aus. Qualität beginnt bei der Quelle.</p>
+                </div>
+
+                <div class="process-card" data-step="2">
+                    <span class="process-card-number">02</span>
+                    <div class="process-card-icon process-card-icon-video">
+                        <video autoplay muted loop playsinline>
+                            <source src="videos/qualität/lieferung.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <span class="process-card-step">Schritt 02</span>
+                    <h3>Tägliche Lieferung</h3>
+                    <p>Jeden Morgen werden frische Zutaten angeliefert – für maximale Frische und Qualität. Keine langen Lagerzeiten.</p>
+                </div>
+
+                <div class="process-card" data-step="3">
+                    <span class="process-card-number">03</span>
+                    <div class="process-card-icon process-card-icon-video">
+                        <video autoplay muted loop playsinline>
+                            <source src="videos/qualität/zubereitung.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <span class="process-card-step">Schritt 03</span>
+                    <h3>Frische Zubereitung</h3>
+                    <p>Jedes Gericht wird frisch vor Ort zubereitet – mit Sorgfalt, Erfahrung und Liebe zum Detail. Keine Wartezeiten, nur Frische.</p>
+                </div>
+
+                <div class="process-card" data-step="4">
+                    <span class="process-card-number">04</span>
+                    <div class="process-card-icon process-card-icon-video">
+                        <video autoplay muted loop playsinline>
+                            <source src="videos/qualität/prüfung.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <span class="process-card-step">Schritt 04</span>
+                    <h3>Qualitätskontrolle</h3>
+                    <p>Bevor ein Gericht unsere Küche verlässt, wird es auf Geschmack und Präsentation geprüft. Nur das Beste für Sie.</p>
+                </div>
+            </div>
+
+            <div class="process-progress">
+                <div class="progress-dots">
+                    <span class="progress-dot active" data-index="0"></span>
+                    <span class="progress-dot" data-index="1"></span>
+                    <span class="progress-dot" data-index="2"></span>
+                    <span class="progress-dot" data-index="3"></span>
+                </div>
+                <div class="progress-line">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="scroll-hint">
+                <span>Scrollen</span>
+                <div class="scroll-hint-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications-section">
+        <div class="section-header reveal">
+            <h2>Unsere <span>Standards</span></h2>
+            <p>Zertifizierte Qualität, der Sie vertrauen können</p>
+        </div>
+        <div class="certifications-grid reveal">
+            <div class="certification-card">
+                <div class="certification-card-inner">
+                    <div class="certification-front">
+                        <div class="certification-icon">🏆</div>
+                        <h4>Hygiene-Zertifikat</h4>
+                        <p>Höchste Hygienestandards</p>
+                    </div>
+                    <div class="certification-back">
+                        <div class="certification-back-icon">✓</div>
+                        <h4>Geprüfte Hygiene</h4>
+                        <p>Regelmäßige Kontrollen durch unabhängige Prüfer. Unsere Küchen erfüllen die strengsten Hygienevorschriften der EU.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="certification-card-inner">
+                    <div class="certification-front">
+                        <div class="certification-icon">🌱</div>
+                        <h4>Bio-Partner</h4>
+                        <p>Zertifizierte Bio-Lieferanten</p>
+                    </div>
+                    <div class="certification-back">
+                        <div class="certification-back-icon">✓</div>
+                        <h4>100% Bio-Qualität</h4>
+                        <p>Wir arbeiten ausschließlich mit zertifizierten Bio-Bauern und Lieferanten aus der Region zusammen.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="certification-card-inner">
+                    <div class="certification-front">
+                        <div class="certification-icon">🍃</div>
+                        <h4>Nachhaltig</h4>
+                        <p>Umweltbewusste Verpackung</p>
+                    </div>
+                    <div class="certification-back">
+                        <div class="certification-back-icon">✓</div>
+                        <h4>Grüne Verpackung</h4>
+                        <p>Biologisch abbaubare Verpackungen und Mehrweg-Optionen. Wir reduzieren Plastik wo immer möglich.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="certification-card-inner">
+                    <div class="certification-front">
+                        <div class="certification-icon">⭐</div>
+                        <h4>Ausgezeichnet</h4>
+                        <p>Top-Bewertungen</p>
+                    </div>
+                    <div class="certification-back">
+                        <div class="certification-back-icon">✓</div>
+                        <h4>Kundenzufriedenheit</h4>
+                        <p>Über 4.8 Sterne bei Google und Lieferando. Tausende zufriedene Kunden vertrauen uns täglich.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Sustainability Section -->
+    <section class="sustainability-section">
+        <div class="sustainability-content">
+            <div class="sustainability-image reveal">
+                <img src="images/erde.png" alt="Erde">
+            </div>
+            <div class="sustainability-text reveal">
+                <h2>Nachhaltigkeit ist uns <span>wichtig</span></h2>
+                <p>
+                    Wir glauben, dass gutes Essen nicht auf Kosten unserer Umwelt gehen darf.
+                    Deshalb setzen wir auf nachhaltige Praktiken in jedem Bereich unseres Geschäfts.
+                </p>
+                <p>
+                    Von der Auswahl unserer Lieferanten bis zur Entsorgung – wir denken
+                    an die Zukunft und handeln verantwortungsvoll.
+                </p>
+                <ul class="sustainability-list">
+                    <li>Biologisch abbaubare Verpackungen</li>
+                    <li>Regionale und saisonale Zutaten</li>
+                    <li>Minimierung von Lebensmittelverschwendung</li>
+                    <li>Energieeffiziente Küchengeräte</li>
+                    <li>Unterstützung lokaler Landwirte</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-box reveal">
+            <h2>Überzeugen Sie sich selbst</h2>
+            <p>Erleben Sie Qualität, die man schmeckt. Besuchen Sie uns!</p>
+            <a href="kontakt.html" class="cta-btn">
+                Jetzt besuchen
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: url('images/holzdunkel.png') center/cover no-repeat;">
+        <div class="footer-logo">Kaya <span>Feinkost</span></div>
+        <div class="footer-links">
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+        </div>
+        <p class="footer-copy">© 2025 Kaya Feinkost. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script>
+        // Initialize Lenis
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            smoothWheel: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Nav scroll effect
+        ScrollTrigger.create({
+            start: 'top -80',
+            end: 99999,
+            toggleClass: { className: 'scrolled', targets: 'nav' }
+        });
+
+        // Page Header Animation
+        gsap.from('.page-header h1', {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.page-header p', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: 'power3.out'
+        });
+
+        // Reveal animations
+        gsap.utils.toArray('.reveal').forEach(elem => {
+            gsap.to(elem, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top 85%',
+                }
+            });
+        });
+
+        // Horizontal Scroll Timeline
+        const processSection = document.querySelector('.process-section');
+        const processHorizontal = document.querySelector('.process-horizontal');
+        const processCards = document.querySelectorAll('.process-card');
+        const progressFill = document.querySelector('.progress-fill');
+        const progressDots = document.querySelectorAll('.progress-dot');
+        const scrollHint = document.querySelector('.scroll-hint');
+
+        if (processSection && processHorizontal) {
+            const totalCards = processCards.length;
+
+            // Calculate total scroll width
+            const getScrollAmount = () => {
+                return processHorizontal.scrollWidth - window.innerWidth + 200;
+            };
+
+            // Header animation
+            gsap.from('.process-header h2', {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.process-section',
+                    start: 'top 90%',
+                }
+            });
+
+            gsap.from('.process-header p', {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.process-section',
+                    start: 'top 90%',
+                }
+            });
+
+            // Horizontal scroll animation
+            gsap.to(processHorizontal, {
+                x: () => -getScrollAmount(),
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.process-wrapper',
+                    start: 'top top',
+                    end: () => `+=${getScrollAmount()}`,
+                    pin: true,
+                    pinSpacing: true,
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                    onUpdate: (self) => {
+                        // Update progress bar
+                        const progress = self.progress * 100;
+                        if (progressFill) {
+                            progressFill.style.width = progress + '%';
+                        }
+
+                        // Update dots
+                        const activeIndex = Math.min(
+                            Math.floor(self.progress * totalCards),
+                            totalCards - 1
+                        );
+
+                        progressDots.forEach((dot, index) => {
+                            if (index <= activeIndex) {
+                                dot.classList.add('active');
+                            } else {
+                                dot.classList.remove('active');
+                            }
+                        });
+
+                        // Activate cards progressively
+                        processCards.forEach((card, index) => {
+                            const cardProgress = (index + 0.5) / totalCards;
+                            if (self.progress >= cardProgress - 0.15) {
+                                card.classList.add('active');
+                            }
+                        });
+
+                        // Hide scroll hint after scrolling starts
+                        if (self.progress > 0.03) {
+                            gsap.to(scrollHint, { opacity: 0, duration: 0.3 });
+                        } else {
+                            gsap.to(scrollHint, { opacity: 1, duration: 0.3 });
+                        }
+                    }
+                }
+            });
+
+            // Card entrance animations
+            processCards.forEach((card, index) => {
+                gsap.from(card, {
+                    opacity: 0,
+                    y: 40,
+                    duration: 0.7,
+                    delay: index * 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.process-section',
+                        start: 'top 80%',
+                    }
+                });
+
+                // Icon animation
+                gsap.from(card.querySelector('.process-card-icon'), {
+                    scale: 0,
+                    rotation: -180,
+                    duration: 0.6,
+                    delay: 0.2 + index * 0.1,
+                    ease: 'back.out(1.7)',
+                    scrollTrigger: {
+                        trigger: '.process-section',
+                        start: 'top 80%',
+                    }
+                });
+            });
+
+            // Refresh on resize
+            window.addEventListener('resize', () => {
+                ScrollTrigger.refresh();
+            });
+        }
+
+        // Falling Leaf Animation with MotionPath
+        gsap.registerPlugin(MotionPathPlugin);
+
+        const fallingLeaf = document.getElementById('fallingLeaf');
+        const leafPath = document.getElementById('leafPath');
+
+        if (fallingLeaf && leafPath) {
+            // Subtle 3D rotation (always running)
+            gsap.to(fallingLeaf.querySelector('svg'), {
+                rotateY: 20,
+                rotateX: 5,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+            });
+
+            // Main falling animation along the curved path
+            gsap.to(fallingLeaf, {
+                motionPath: {
+                    path: leafPath,
+                    align: leafPath,
+                    alignOrigin: [0.5, 0.5],
+                    autoRotate: 45,  // Leaf rotates along path + 45 degrees offset
+                },
+                scale: 0.6,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 2,  // Smooth scrubbing
+                }
+            });
+
+            // Fade out near the end
+            gsap.to(fallingLeaf, {
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: '.cta-section',
+                    start: 'top center',
+                    end: 'bottom bottom',
+                    scrub: 1,
+                }
+            });
+        }
+
+        // Smooth Flip Animation for Certification Cards
+        const certCards = document.querySelectorAll('.certification-card');
+
+        certCards.forEach((card) => {
+            const inner = card.querySelector('.certification-card-inner');
+            const back = card.querySelector('.certification-back');
+
+            // Set initial state
+            gsap.set(inner, { rotateY: 0, transformPerspective: 1000 });
+            gsap.set(back, { rotateY: 180 });
+
+            card.addEventListener('mouseenter', () => {
+                // Kill any running animations on these elements
+                gsap.killTweensOf(inner);
+                gsap.killTweensOf(card);
+
+                gsap.to(inner, {
+                    rotateY: 180,
+                    duration: 0.9,
+                    ease: 'power2.inOut'
+                });
+
+                gsap.to(card, {
+                    scale: 1.03,
+                    y: -8,
+                    boxShadow: '0 30px 60px rgba(122, 158, 126, 0.35)',
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                // Kill any running animations on these elements
+                gsap.killTweensOf(inner);
+                gsap.killTweensOf(card);
+
+                gsap.to(inner, {
+                    rotateY: 0,
+                    duration: 0.7,
+                    ease: 'power2.inOut'
+                });
+
+                gsap.to(card, {
+                    scale: 1,
+                    y: 0,
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

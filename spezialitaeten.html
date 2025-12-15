@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spezialitäten | Kaya Feinkost</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FDFBF7;
+            --sage: #7A9E7E;
+            --sage-light: #A8C5AB;
+            --sage-dark: #5C7A5F;
+            --wood: #C4A574;
+            --wood-dark: #8B6F47;
+            --wood-light: #E8D5B5;
+            --wood-medium: #A67C52;
+            --charcoal: #2D2D2D;
+            --text: #3A3A3A;
+            --text-light: #6B6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        nav.scrolled {
+            padding: 1rem 4rem;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        .logo span {
+            color: var(--sage);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--sage);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--sage);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 12rem 4rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, var(--sage-light) 0%, transparent 70%);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .page-header h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Menu Categories Navigation */
+        .menu-nav {
+            padding: 2rem 4rem;
+            position: sticky;
+            top: 80px;
+            background: var(--cream);
+            z-index: 100;
+            border-bottom: 1px solid var(--wood-light);
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--wood-light);
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        .menu-tab:hover,
+        .menu-tab.active {
+            background: var(--sage);
+            border-color: var(--sage);
+            color: white;
+        }
+
+        /* Menu Sections */
+        .menu-section {
+            padding: 5rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-section:nth-child(even) {
+            background: linear-gradient(180deg, transparent, rgba(168, 197, 171, 0.08), transparent);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--charcoal);
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title h2 span {
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .section-title-icon {
+            font-size: 2.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.03);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--sage), var(--wood));
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .menu-item-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--sage-light), var(--sage));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .menu-item-content {
+            flex: 1;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item h3 {
+            font-size: 1.4rem;
+            color: var(--charcoal);
+        }
+
+        .menu-item-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--sage);
+            font-weight: 600;
+        }
+
+        .menu-item-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .menu-item-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .menu-tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--wood-light);
+            color: var(--wood-dark);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .menu-tag.popular {
+            background: var(--sage-light);
+            color: var(--sage-dark);
+        }
+
+        .menu-tag.new {
+            background: #FFE4E1;
+            color: #C75050;
+        }
+
+        .menu-tag.vegan {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .menu-tag.spicy {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        /* Special Offer Banner */
+        .special-offer {
+            margin: 4rem auto;
+            max-width: 1000px;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--wood), var(--wood-medium));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            color: white;
+        }
+
+        .special-offer-content h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .special-offer-content p {
+            opacity: 0.9;
+        }
+
+        .special-offer-price {
+            text-align: center;
+        }
+
+        .special-offer-price .old-price {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .special-offer-price .new-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+        }
+
+        /* Drinks Section */
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .drink-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: white;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .drink-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .drink-name {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .drink-icon {
+            font-size: 1.5rem;
+        }
+
+        .drink-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--charcoal);
+        }
+
+        .drink-item span {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .drink-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--sage);
+        }
+
+        /* Info Note */
+        .menu-note {
+            text-align: center;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .menu-note strong {
+            color: var(--sage);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 4rem;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem;
+            background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+            border-radius: 30px;
+            color: white;
+        }
+
+        .cta-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: var(--sage-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage), var(--sage-light), var(--sage));
+        }
+
+        .wood-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #FDF8F3;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .footer-logo span {
+            color: var(--sage-light);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links a {
+            color: rgba(253, 248, 243, 0.8);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .footer-links a:hover {
+            color: var(--sage-light);
+        }
+
+        .footer-copy {
+            color: rgba(253, 248, 243, 0.6);
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .special-offer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header,
+            .menu-section,
+            .cta-section {
+                padding: 4rem 2rem;
+            }
+
+            .menu-nav {
+                padding: 1.5rem 2rem;
+                top: 60px;
+            }
+
+            .menu-categories {
+                gap: 0.5rem;
+            }
+
+            .menu-tab {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.75rem;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .menu-item-header {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .menu-item-tags {
+                justify-content: center;
+            }
+
+            .drinks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Kaya <span>Feinkost</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="spezialitaeten.html" class="active">Spezialitäten</a></li>
+            <li><a href="qualitaet.html">Qualität</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Unsere <span>Spezialitäten</span></h1>
+        <p>Von traditionellem Döner bis zu italienischer Pasta – entdecken Sie unsere kulinarische Vielfalt.</p>
+    </header>
+
+    <!-- Menu Categories Navigation -->
+    <div class="menu-nav">
+        <div class="menu-categories">
+            <button class="menu-tab active" data-category="all">Alle</button>
+            <button class="menu-tab" data-category="doener">Döner</button>
+            <button class="menu-tab" data-category="pasta">Pasta</button>
+            <button class="menu-tab" data-category="salate">Salate</button>
+            <button class="menu-tab" data-category="beilagen">Beilagen</button>
+            <button class="menu-tab" data-category="getraenke">Getränke</button>
+        </div>
+    </div>
+
+    <!-- Döner Section -->
+    <section class="menu-section" id="doener">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon">🥙</span> Döner <span>Spezialitäten</span></h2>
+            <p>Traditionell mariniert, täglich frisch zubereitet</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥙</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Classic Döner</h3>
+                        <span class="menu-item-price">€7,50</span>
+                    </div>
+                    <p class="menu-item-desc">Zartes Dönerfleisch, frisches Gemüse, hausgemachte Saucen im knusprigen Fladenbrot</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🌯</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Döner Dürüm</h3>
+                        <span class="menu-item-price">€8,00</span>
+                    </div>
+                    <p class="menu-item-desc">Dönerfleisch gerollt im dünnen Yufka-Fladen mit Salat und Saucen nach Wahl</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Klassiker</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍽️</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Döner Teller</h3>
+                        <span class="menu-item-price">€11,90</span>
+                    </div>
+                    <p class="menu-item-desc">Großzügige Portion Dönerfleisch mit Reis, Salat, gegrilltem Gemüse und Saucen</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Reichhaltig</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥗</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Döner Bowl</h3>
+                        <span class="menu-item-price">€10,50</span>
+                    </div>
+                    <p class="menu-item-desc">Reis-Bowl mit mariniertem Dönerfleisch, Hummus, Tabouleh und Tahini-Dressing</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag new">Neu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍖</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Döner Box</h3>
+                        <span class="menu-item-price">€9,50</span>
+                    </div>
+                    <p class="menu-item-desc">Dönerfleisch mit Pommes, frischem Salat und zwei Saucen nach Wahl</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🌶️</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Spicy Döner</h3>
+                        <span class="menu-item-price">€8,00</span>
+                    </div>
+                    <p class="menu-item-desc">Klassischer Döner mit scharfer Harissa-Sauce, Jalapeños und Peperoni</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag spicy">Scharf</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pasta Section -->
+    <section class="menu-section" id="pasta">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon">🍝</span> Pasta <span>Kreationen</span></h2>
+            <p>Italienische Klassiker mit mediterranem Flair</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍝</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pasta Pomodoro</h3>
+                        <span class="menu-item-price">€9,90</span>
+                    </div>
+                    <p class="menu-item-desc">Hausgemachte Pasta mit sonnengereiften Tomaten, frischem Basilikum und Parmigiano</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥓</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pasta Carbonara</h3>
+                        <span class="menu-item-price">€11,90</span>
+                    </div>
+                    <p class="menu-item-desc">Cremige Carbonara mit Guanciale, Eigelb und frisch geriebenem Pecorino</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥬</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pasta Primavera</h3>
+                        <span class="menu-item-price">€9,50</span>
+                    </div>
+                    <p class="menu-item-desc">Frische Pasta mit saisonalem Gemüse in leichter Olivenöl-Knoblauch-Sauce</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍖</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pasta Bolognese</h3>
+                        <span class="menu-item-price">€10,90</span>
+                    </div>
+                    <p class="menu-item-desc">Klassische Bolognese mit hausgemachtem Ragù aus Rinderhack und Tomaten</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Klassiker</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🦐</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pasta Frutti di Mare</h3>
+                        <span class="menu-item-price">€14,90</span>
+                    </div>
+                    <p class="menu-item-desc">Meeresfrüchte-Pasta mit Garnelen, Muscheln und Calamari in Weißweinsauce</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Premium</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🧀</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pasta Quattro Formaggi</h3>
+                        <span class="menu-item-price">€11,50</span>
+                    </div>
+                    <p class="menu-item-desc">Cremige Vier-Käse-Sauce mit Gorgonzola, Parmesan, Mozzarella und Pecorino</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offer -->
+    <div class="special-offer reveal">
+        <div class="special-offer-content">
+            <h3>Mittagsmenü</h3>
+            <p>Montag bis Freitag, 11:00 - 15:00 Uhr<br>Hauptgericht + Getränk + Dessert</p>
+        </div>
+        <div class="special-offer-price">
+            <span class="old-price">€16,90</span>
+            <span class="new-price">€12,90</span>
+        </div>
+    </div>
+
+    <!-- Salate Section -->
+    <section class="menu-section" id="salate">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon">🥗</span> Frische <span>Salate</span></h2>
+            <p>Knackig, gesund und voller Geschmack</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥗</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Döner Salat</h3>
+                        <span class="menu-item-price">€8,90</span>
+                    </div>
+                    <p class="menu-item-desc">Knackiger Salat mit saftigen Dönerstreifen, Feta und Granatapfelkernen</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🧀</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Caesar Salad</h3>
+                        <span class="menu-item-price">€9,50</span>
+                    </div>
+                    <p class="menu-item-desc">Römersalat mit Parmesan, Croutons und hausgemachtem Caesar-Dressing</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Klassiker</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍅</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Griechischer Salat</h3>
+                        <span class="menu-item-price">€7,90</span>
+                    </div>
+                    <p class="menu-item-desc">Tomaten, Gurken, Oliven, Zwiebeln und Feta mit Oregano und Olivenöl</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥑</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Avocado Bowl</h3>
+                        <span class="menu-item-price">€10,50</span>
+                    </div>
+                    <p class="menu-item-desc">Quinoa, Avocado, Kichererbsen, Kirschtomaten und Tahini-Dressing</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegan</span>
+                        <span class="menu-tag new">Neu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beilagen Section -->
+    <section class="menu-section" id="beilagen">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon">🍟</span> Beilagen & <span>Extras</span></h2>
+            <p>Die perfekte Ergänzung zu Ihrem Hauptgericht</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pommes Frites</h3>
+                        <span class="menu-item-price">€3,50</span>
+                    </div>
+                    <p class="menu-item-desc">Knusprig goldene Pommes aus frischen Kartoffeln</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🧆</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Falafel (4 Stk.)</h3>
+                        <span class="menu-item-price">€4,50</span>
+                    </div>
+                    <p class="menu-item-desc">Hausgemachte knusprige Falafel aus Kichererbsen mit Kräutern</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥖</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Knoblauchbrot</h3>
+                        <span class="menu-item-price">€3,00</span>
+                    </div>
+                    <p class="menu-item-desc">Frisch gebackenes Brot mit hausgemachter Kräuterbutter</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥣</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Hummus</h3>
+                        <span class="menu-item-price">€4,00</span>
+                    </div>
+                    <p class="menu-item-desc">Cremiger Hummus serviert mit warmem Fladenbrot</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍚</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Reis</h3>
+                        <span class="menu-item-price">€2,50</span>
+                    </div>
+                    <p class="menu-item-desc">Orientalisch gewürzter Basmatireis mit Safran</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥒</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Tzatziki</h3>
+                        <span class="menu-item-price">€2,00</span>
+                    </div>
+                    <p class="menu-item-desc">Hausgemachter griechischer Joghurt-Dip mit Gurke und Knoblauch</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getränke Section -->
+    <section class="menu-section" id="getraenke">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon">🥤</span> Erfrischende <span>Getränke</span></h2>
+            <p>Von hausgemachtem Ayran bis zu italienischem Espresso</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥛</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Ayran</h3>
+                        <span class="menu-item-price">€2,50</span>
+                    </div>
+                    <p class="menu-item-desc">Traditionelles türkisches Joghurtgetränk, frisch zubereitet und leicht gesalzen</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🍋</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Hausgemachte Limonade</h3>
+                        <span class="menu-item-price">€3,50</span>
+                    </div>
+                    <p class="menu-item-desc">Erfrischende Limonade aus frisch gepressten Zitronen oder mit frischer Minze</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag new">Neu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">☕</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Espresso</h3>
+                        <span class="menu-item-price">€2,00</span>
+                    </div>
+                    <p class="menu-item-desc">Kräftiger italienischer Espresso aus hochwertiger Arabica-Röstung</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Klassiker</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🫖</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Türkischer Tee</h3>
+                        <span class="menu-item-price">€2,00</span>
+                    </div>
+                    <p class="menu-item-desc">Traditioneller schwarzer Tee, serviert im typischen Glas mit Zucker nach Wahl</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">🥤</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Softdrinks</h3>
+                        <span class="menu-item-price">€2,50</span>
+                    </div>
+                    <p class="menu-item-desc">Erfrischende Auswahl: Coca-Cola, Fanta Orange oder Sprite</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Klassiker</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon">💧</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Mineralwasser</h3>
+                        <span class="menu-item-price">€2,00</span>
+                    </div>
+                    <p class="menu-item-desc">Natürliches Mineralwasser, wahlweise still oder mit Kohlensäure (0,5L)</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Natürlich</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Note -->
+    <div class="menu-note reveal">
+        <p>
+            <strong>Allergene & Zusatzstoffe:</strong> Informationen zu Allergenen und Zusatzstoffen
+            erhalten Sie auf Anfrage. Alle Preise inkl. MwSt. Änderungen vorbehalten.
+        </p>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-box reveal">
+            <h2>Hunger bekommen?</h2>
+            <p>Reservieren Sie einen Tisch oder bestellen Sie zur Abholung.</p>
+            <a href="kontakt.html" class="cta-btn">
+                Jetzt bestellen
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: url('images/holzdunkel.png') center/cover no-repeat;">
+        <div class="footer-logo">Kaya <span>Feinkost</span></div>
+        <div class="footer-links">
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+        </div>
+        <p class="footer-copy">© 2025 Kaya Feinkost. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script>
+        // Initialize Lenis
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            smoothWheel: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Nav scroll effect
+        ScrollTrigger.create({
+            start: 'top -80',
+            end: 99999,
+            toggleClass: { className: 'scrolled', targets: 'nav' }
+        });
+
+        // Page Header Animation
+        gsap.from('.page-header h1', {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.page-header p', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: 'power3.out'
+        });
+
+        // Menu Nav Animation
+        gsap.from('.menu-nav', {
+            y: -20,
+            opacity: 0,
+            duration: 0.8,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+
+        // Reveal animations for all sections
+        gsap.utils.toArray('.reveal').forEach(elem => {
+            gsap.to(elem, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top 85%',
+                }
+            });
+        });
+
+        // Menu Tabs
+        const tabs = document.querySelectorAll('.menu-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const category = tab.dataset.category;
+                const sections = document.querySelectorAll('.menu-section');
+
+                if (category === 'all') {
+                    sections.forEach(s => s.style.display = 'block');
+                } else {
+                    sections.forEach(s => {
+                        if (s.id === category) {
+                            s.style.display = 'block';
+                        } else {
+                            s.style.display = 'none';
+                        }
+                    });
+                }
+                ScrollTrigger.refresh();
+            });
+        });
+    </script>
+</body>
+</html>
