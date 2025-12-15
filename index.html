@@ -2106,10 +2106,32 @@
                     oliveBranch = gltf.scene;
 
                     oliveBranch.traverse((child) => {
-                        if (child.isMesh && child.material) {
-                            child.material.transparent = true;
-                            child.material.opacity = 0;
-                            child.material.needsUpdate = true;
+                        if (child.isMesh) {
+                            // Smooth the geometry - recalculate vertex normals
+                            if (child.geometry) {
+                                child.geometry.computeVertexNormals();
+                            }
+
+                            // Create smooth, glossy material
+                            const oldMaterial = child.material;
+                            const color = oldMaterial.color ? oldMaterial.color : new THREE.Color(0x4a7c4e);
+
+                            child.material = new THREE.MeshPhysicalMaterial({
+                                color: color,
+                                metalness: 0.1,
+                                roughness: 0.25,
+                                clearcoat: 0.8,
+                                clearcoatRoughness: 0.1,
+                                reflectivity: 0.9,
+                                transparent: true,
+                                opacity: 0,
+                                flatShading: false,
+                                side: THREE.DoubleSide,
+                                envMapIntensity: 1.5
+                            });
+
+                            child.castShadow = true;
+                            child.receiveShadow = true;
                         }
                     });
 
