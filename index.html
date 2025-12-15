@@ -2088,13 +2088,13 @@
             let modelLoaded = false;
 
             const oliveState = {
-                x: 3.5,
-                y: 0.5,
-                z: 0,
-                rotX: 0.2,
-                rotY: -0.3,
-                rotZ: 0.1,
-                scale: 2.0,
+                x: 0,
+                y: 0,
+                z: -2,
+                rotX: 0.1,
+                rotY: 0,
+                rotZ: 0.05,
+                scale: 4.5,
                 opacity: 0
             };
 
@@ -2106,32 +2106,10 @@
                     oliveBranch = gltf.scene;
 
                     oliveBranch.traverse((child) => {
-                        if (child.isMesh) {
-                            // Smooth the geometry - recalculate vertex normals
-                            if (child.geometry) {
-                                child.geometry.computeVertexNormals();
-                            }
-
-                            // Create smooth, glossy material
-                            const oldMaterial = child.material;
-                            const color = oldMaterial.color ? oldMaterial.color : new THREE.Color(0x4a7c4e);
-
-                            child.material = new THREE.MeshPhysicalMaterial({
-                                color: color,
-                                metalness: 0.1,
-                                roughness: 0.25,
-                                clearcoat: 0.8,
-                                clearcoatRoughness: 0.1,
-                                reflectivity: 0.9,
-                                transparent: true,
-                                opacity: 0,
-                                flatShading: false,
-                                side: THREE.DoubleSide,
-                                envMapIntensity: 1.5
-                            });
-
-                            child.castShadow = true;
-                            child.receiveShadow = true;
+                        if (child.isMesh && child.material) {
+                            child.material.transparent = true;
+                            child.material.opacity = 0;
+                            child.material.needsUpdate = true;
                         }
                     });
 
@@ -2189,17 +2167,17 @@
 
                 // Gentle floating in hero
                 gsap.to(oliveState, {
-                    y: '+=0.2',
-                    duration: 3,
+                    y: '+=0.3',
+                    duration: 3.5,
                     ease: 'sine.inOut',
                     yoyo: true,
                     repeat: -1
                 });
 
                 gsap.to(oliveState, {
-                    rotZ: '+=0.05',
-                    rotY: '-=0.1',
-                    duration: 4,
+                    rotZ: '+=0.03',
+                    rotY: '+=0.05',
+                    duration: 5,
                     ease: 'sine.inOut',
                     yoyo: true,
                     repeat: -1
@@ -2217,7 +2195,7 @@
                         scrub: 1.2,
                         onUpdate: (self) => {
                             // Dynamic target tracking
-                            if (self.progress > 0.5) {
+                            if (self.progress > 0.6) {
                                 const target = getTargetPosition();
                                 gsap.to(oliveState, {
                                     x: target.x,
@@ -2230,29 +2208,28 @@
                     }
                 });
 
-                // Phase 1: Float up and start moving (0% - 25%)
+                // Phase 1: Move forward and start rotating (0% - 30%)
                 mainTimeline.to(oliveState, {
-                    y: 1.5,
-                    x: 2,
-                    rotY: Math.PI * 0.5,
-                    rotX: 0.4,
-                    scale: 2.5,
-                    duration: 0.25,
+                    z: 1,
+                    rotY: Math.PI * 0.4,
+                    rotX: 0.2,
+                    scale: 5,
+                    duration: 0.3,
                     ease: 'power1.inOut'
                 }, 0);
 
-                // Phase 2: Dramatic spiral across screen (25% - 50%)
+                // Phase 2: Spiral to the right (30% - 50%)
                 mainTimeline.to(oliveState, {
-                    x: 0,
-                    y: 0,
+                    x: 2,
+                    y: 0.5,
                     z: 2,
-                    rotY: Math.PI * 1.2,
-                    rotX: -0.2,
-                    rotZ: 0.3,
-                    scale: 3,
-                    duration: 0.25,
+                    rotY: Math.PI * 1,
+                    rotX: -0.1,
+                    rotZ: 0.2,
+                    scale: 3.5,
+                    duration: 0.2,
                     ease: 'power2.inOut'
-                }, 0.25);
+                }, 0.3);
 
                 // Phase 3: Swoop down toward left (50% - 75%)
                 mainTimeline.to(oliveState, {
@@ -2261,7 +2238,7 @@
                     z: 1,
                     rotY: Math.PI * 1.8,
                     rotX: 0.1,
-                    rotZ: -0.2,
+                    rotZ: -0.15,
                     scale: 2,
                     duration: 0.25,
                     ease: 'power2.inOut'
@@ -2273,9 +2250,9 @@
                     y: -1,
                     z: 0.5,
                     rotY: Math.PI * 2.2,
-                    rotX: -0.15,
-                    rotZ: 0.1,
-                    scale: 0.8,
+                    rotX: -0.1,
+                    rotZ: 0.08,
+                    scale: 0.9,
                     duration: 0.25,
                     ease: 'power2.out'
                 }, 0.75);
