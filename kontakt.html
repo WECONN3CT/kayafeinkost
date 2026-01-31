@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt & Standorte | Kaya Feinkost</title>
+    <meta name="description" content="Finden Sie Ihre nächste Kaya Feinkost Filiale. 7 Standorte in NRW: Troisdorf, Sankt Augustin, Euskirchen, Dormagen und Neuss.">
+    <meta name="keywords" content="Kontakt, Standorte, Troisdorf, Sankt Augustin, Euskirchen, Dormagen, Neuss, Öffnungszeiten">
+    <meta property="og:title" content="Kontakt & Standorte | Kaya Feinkost">
+    <meta property="og:description" content="7 Standorte in Ihrer Nähe. Besuchen Sie uns für mediterrane Feinkost-Spezialitäten.">
+    <link rel="canonical" href="https://kaya-feinkost.de/kontakt.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -75,15 +80,18 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--charcoal);
-            text-decoration: none;
-            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
         }
 
-        .logo span {
-            color: var(--sage);
+        .logo img {
+            height: 45px;
+            width: auto;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .logo img {
+            height: 40px;
         }
 
         .nav-links {
@@ -120,6 +128,99 @@
 
         .nav-links a.active {
             color: var(--sage);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--cream);
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 999;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--wood-light);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--sage);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
         }
 
         /* Page Header */
@@ -664,6 +765,42 @@
             }
         }
 
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            z-index: 900;
+            box-shadow: 0 10px 30px rgba(122, 158, 126, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: var(--sage-dark);
+            transform: translateY(-3px);
+        }
+
+        .scroll-top svg {
+            stroke: white;
+        }
+
         /* Animations */
         .reveal {
             opacity: 0;
@@ -674,44 +811,63 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <a href="index.html" class="logo">Kaya <span>Feinkost</span></a>
+        <a href="index.html" class="logo"><img src="images/kayalogo-wide.png" alt="Kaya Feinkost"></a>
         <ul class="nav-links">
             <li><a href="index.html">Start</a></li>
             <li><a href="spezialitaeten.html">Spezialitäten</a></li>
             <li><a href="qualitaet.html">Qualität</a></li>
             <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="standorte/index.html">Standorte</a></li>
             <li><a href="kontakt.html" class="active">Kontakt</a></li>
         </ul>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="spezialitaeten.html">Spezialitäten</a></li>
+            <li><a href="qualitaet.html">Qualität</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="standorte/index.html">Standorte</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+    </div>
 
     <!-- Page Header -->
     <header class="page-header">
         <h1>Unsere <span>Standorte</span></h1>
-        <p>Besuchen Sie uns an einem unserer vier Standorte in Ihrer Nähe.</p>
+        <p>Besuchen Sie uns an einem unserer sieben Standorte in Ihrer Nähe.</p>
     </header>
 
     <!-- Locations Section -->
     <section class="locations-section">
-        <h2>4x für Sie <span>da</span></h2>
-        <p class="locations-subtitle">Frische Döner & Pasta an jedem Standort</p>
+        <h2>7x für Sie <span>da</span></h2>
+        <p class="locations-subtitle">Mediterrane Feinkost an jedem Standort</p>
 
         <div class="locations-grid">
-            <!-- Dormagen -->
+            <!-- HIT Sieglar Kaya Feinkost -->
             <div class="location-card reveal">
                 <div class="location-card-header">
-                    <div class="location-card-icon">📍</div>
-                    <h3>Dormagen</h3>
+                    <div class="location-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>HIT Sieglar Feinkost</h3>
                 </div>
                 <div class="location-details">
                     <div class="location-detail">
-                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Adresse</h4>
-                            <p>Lübeckerstr. 1<br>41539 Dormagen</p>
+                            <p>Spicherstr. 101<br>53840 Troisdorf</p>
                         </div>
                     </div>
                     <div class="location-detail">
-                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Öffnungszeiten</h4>
                             <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
@@ -719,11 +875,107 @@
                     </div>
                 </div>
                 <div class="location-card-actions">
-                    <a href="https://maps.google.com/?q=Lübeckerstr.+1,+Dormagen" target="_blank" class="location-btn primary">
+                    <a href="https://maps.google.com/?q=Spicherstr.+101,+Troisdorf" target="_blank" class="location-btn primary">
                         Route planen
                     </a>
-                    <a href="tel:+49" class="location-btn secondary">
-                        Anrufen
+                    <a href="standorte/hit-sieglar-feinkost.html" class="location-btn secondary">
+                        Fotos & Videos
+                    </a>
+                </div>
+            </div>
+
+            <!-- HIT Sieglar Kaya Döner -->
+            <div class="location-card reveal">
+                <div class="location-card-header">
+                    <div class="location-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>HIT Sieglar Döner</h3>
+                </div>
+                <div class="location-details">
+                    <div class="location-detail">
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                        <div class="location-detail-content">
+                            <h4>Adresse</h4>
+                            <p>Spicherstr. 101<br>53840 Troisdorf</p>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                        <div class="location-detail-content">
+                            <h4>Öffnungszeiten</h4>
+                            <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card-actions">
+                    <a href="https://maps.google.com/?q=Spicherstr.+101,+Troisdorf" target="_blank" class="location-btn primary">
+                        Route planen
+                    </a>
+                    <a href="standorte/hit-sieglar-doener.html" class="location-btn secondary">
+                        Fotos & Videos
+                    </a>
+                </div>
+            </div>
+
+            <!-- HUMA Kaya Feinkost -->
+            <div class="location-card reveal">
+                <div class="location-card-header">
+                    <div class="location-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>HUMA Feinkost</h3>
+                </div>
+                <div class="location-details">
+                    <div class="location-detail">
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                        <div class="location-detail-content">
+                            <h4>Adresse</h4>
+                            <p>Rathausallee 16<br>53757 Sankt Augustin</p>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                        <div class="location-detail-content">
+                            <h4>Öffnungszeiten</h4>
+                            <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card-actions">
+                    <a href="https://maps.google.com/?q=Rathausallee+16,+Sankt+Augustin" target="_blank" class="location-btn primary">
+                        Route planen
+                    </a>
+                    <a href="standorte/huma-feinkost.html" class="location-btn secondary">
+                        Fotos & Videos
+                    </a>
+                </div>
+            </div>
+
+            <!-- HUMA Kaya Döner -->
+            <div class="location-card reveal">
+                <div class="location-card-header">
+                    <div class="location-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>HUMA Döner</h3>
+                </div>
+                <div class="location-details">
+                    <div class="location-detail">
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                        <div class="location-detail-content">
+                            <h4>Adresse</h4>
+                            <p>Rathausallee 16<br>53757 Sankt Augustin</p>
+                        </div>
+                    </div>
+                    <div class="location-detail">
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                        <div class="location-detail-content">
+                            <h4>Öffnungszeiten</h4>
+                            <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-card-actions">
+                    <a href="https://maps.google.com/?q=Rathausallee+16,+Sankt+Augustin" target="_blank" class="location-btn primary">
+                        Route planen
+                    </a>
+                    <a href="standorte/huma-doener.html" class="location-btn secondary">
+                        Fotos & Videos
                     </a>
                 </div>
             </div>
@@ -731,19 +983,19 @@
             <!-- Euskirchen -->
             <div class="location-card reveal">
                 <div class="location-card-header">
-                    <div class="location-card-icon">📍</div>
+                    <div class="location-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
                     <h3>Euskirchen</h3>
                 </div>
                 <div class="location-details">
                     <div class="location-detail">
-                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Adresse</h4>
                             <p>Roitzheimerstr. 117<br>53879 Euskirchen</p>
                         </div>
                     </div>
                     <div class="location-detail">
-                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Öffnungszeiten</h4>
                             <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
@@ -754,28 +1006,28 @@
                     <a href="https://maps.google.com/?q=Roitzheimerstr.+117,+Euskirchen" target="_blank" class="location-btn primary">
                         Route planen
                     </a>
-                    <a href="tel:+49" class="location-btn secondary">
-                        Anrufen
+                    <a href="standorte/euskirchen-feinkost.html" class="location-btn secondary">
+                        Fotos ansehen
                     </a>
                 </div>
             </div>
 
-            <!-- Troisdorf -->
+            <!-- Dormagen -->
             <div class="location-card reveal">
                 <div class="location-card-header">
-                    <div class="location-card-icon">📍</div>
-                    <h3>Troisdorf</h3>
+                    <div class="location-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>Dormagen</h3>
                 </div>
                 <div class="location-details">
                     <div class="location-detail">
-                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Adresse</h4>
-                            <p>Speicherstr. 101<br>53840 Troisdorf</p>
+                            <p>Lübeckerstr. 1<br>41539 Dormagen</p>
                         </div>
                     </div>
                     <div class="location-detail">
-                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Öffnungszeiten</h4>
                             <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
@@ -783,31 +1035,31 @@
                     </div>
                 </div>
                 <div class="location-card-actions">
-                    <a href="https://maps.google.com/?q=Speicherstr.+101,+Troisdorf" target="_blank" class="location-btn primary">
+                    <a href="https://maps.google.com/?q=Lübeckerstr.+1,+Dormagen" target="_blank" class="location-btn primary">
                         Route planen
                     </a>
-                    <a href="tel:+49" class="location-btn secondary">
-                        Anrufen
+                    <a href="standorte/dormagen-feinkost.html" class="location-btn secondary">
+                        Fotos ansehen
                     </a>
                 </div>
             </div>
 
-            <!-- Sankt Augustin -->
+            <!-- Neuss -->
             <div class="location-card reveal">
                 <div class="location-card-header">
-                    <div class="location-card-icon">📍</div>
-                    <h3>Sankt Augustin</h3>
+                    <div class="location-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>Neuss</h3>
                 </div>
                 <div class="location-details">
                     <div class="location-detail">
-                        <div class="location-detail-icon">🏠</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Adresse</h4>
-                            <p>Rathausallee 15<br>53757 Sankt Augustin</p>
+                            <p>Breslauerstr.<br>41460 Neuss</p>
                         </div>
                     </div>
                     <div class="location-detail">
-                        <div class="location-detail-icon">🕐</div>
+                        <div class="location-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
                         <div class="location-detail-content">
                             <h4>Öffnungszeiten</h4>
                             <p>Mo-Sa: 11:00 - 22:00 Uhr</p>
@@ -815,11 +1067,11 @@
                     </div>
                 </div>
                 <div class="location-card-actions">
-                    <a href="https://maps.google.com/?q=Rathausallee+15,+Sankt+Augustin" target="_blank" class="location-btn primary">
+                    <a href="https://maps.google.com/?q=Breslauerstr.,+41460+Neuss" target="_blank" class="location-btn primary">
                         Route planen
                     </a>
-                    <a href="tel:+49" class="location-btn secondary">
-                        Anrufen
+                    <a href="standorte/neuss-feinkost.html" class="location-btn secondary">
+                        Fotos ansehen
                     </a>
                 </div>
             </div>
@@ -859,10 +1111,13 @@
                         <label>Standort</label>
                         <select>
                             <option value="">Standort wählen...</option>
-                            <option value="dormagen">Dormagen</option>
+                            <option value="hit-sieglar-feinkost">HIT Sieglar Feinkost (Troisdorf)</option>
+                            <option value="hit-sieglar-doener">HIT Sieglar Döner (Troisdorf)</option>
+                            <option value="huma-feinkost">HUMA Feinkost (Sankt Augustin)</option>
+                            <option value="huma-doener">HUMA Döner (Sankt Augustin)</option>
                             <option value="euskirchen">Euskirchen</option>
-                            <option value="troisdorf">Troisdorf</option>
-                            <option value="sankt-augustin">Sankt Augustin</option>
+                            <option value="dormagen">Dormagen</option>
+                            <option value="neuss">Neuss</option>
                         </select>
                     </div>
                 </div>
@@ -949,6 +1204,13 @@
         </div>
     </section>
 
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="lenis.scrollTo(0, { duration: 2 })">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </div>
+
     <!-- Footer -->
     <footer style="background: url('images/holzdunkel.png') center/cover no-repeat;">
         <div class="footer-logo">Kaya <span>Feinkost</span></div>
@@ -958,7 +1220,7 @@
             <a href="#">Instagram</a>
             <a href="#">Facebook</a>
         </div>
-        <p class="footer-copy">© 2025 Kaya Feinkost. Alle Rechte vorbehalten.</p>
+        <p class="footer-copy">© 2026 Kaya Feinkost. Alle Rechte vorbehalten.</p>
     </footer>
 
     <!-- GSAP & Lenis -->
@@ -1095,6 +1357,34 @@
                 item.classList.toggle('active');
             });
         });
+
+        // Scroll to Top Button visibility
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        if (scrollTopBtn) {
+            ScrollTrigger.create({
+                start: 'top -400',
+                end: 99999,
+                onEnter: () => scrollTopBtn.classList.add('visible'),
+                onLeaveBack: () => scrollTopBtn.classList.remove('visible')
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('.mobile-nav');
+            const overlay = document.querySelector('.mobile-nav-overlay');
+
+            toggle.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
     </script>
 </body>
 </html>

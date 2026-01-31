@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Über uns | Kaya Feinkost</title>
+    <meta name="description" content="Die Geschichte von Kaya Feinkost - eine Familientradition seit 2009. Erfahren Sie mehr über unsere Leidenschaft für mediterrane Küche.">
+    <meta name="keywords" content="Über uns, Geschichte, Familie, Tradition, Kaya Feinkost">
+    <meta property="og:title" content="Über uns | Kaya Feinkost">
+    <meta property="og:description" content="Eine Leidenschaft für gutes Essen, verwurzelt in Tradition und bereichert durch Innovation.">
+    <link rel="canonical" href="https://kaya-feinkost.de/ueber-uns.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -75,15 +80,18 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--charcoal);
-            text-decoration: none;
-            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
         }
 
-        .logo span {
-            color: var(--sage);
+        .logo img {
+            height: 45px;
+            width: auto;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .logo img {
+            height: 40px;
         }
 
         .nav-links {
@@ -120,6 +128,99 @@
 
         .nav-links a.active {
             color: var(--sage);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--cream);
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 999;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--wood-light);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--sage);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
         }
 
         /* Page Header */
@@ -202,7 +303,11 @@
         }
 
         .story-image.herbs::before {
-            content: '🌿';
+            content: '';
+        }
+
+        .story-image.herbs {
+            background: url('images/über uns/geschichte.png') center/cover no-repeat, linear-gradient(145deg, var(--sage-light), var(--wood-light));
         }
 
         .story-image.chef {
@@ -214,7 +319,11 @@
         }
 
         .story-image.family::before {
-            content: '👨‍👩‍👧‍👦';
+            content: '';
+        }
+
+        .story-image.family {
+            background: url('images/über uns/familie.png') center/cover no-repeat, linear-gradient(145deg, var(--sage-light), var(--wood-light));
         }
 
         .story-image-frame {
@@ -738,6 +847,42 @@
             }
         }
 
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            z-index: 900;
+            box-shadow: 0 10px 30px rgba(122, 158, 126, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: var(--sage-dark);
+            transform: translateY(-3px);
+        }
+
+        .scroll-top svg {
+            stroke: white;
+        }
+
         /* Animations */
         .reveal {
             opacity: 0;
@@ -748,15 +893,34 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <a href="index.html" class="logo">Kaya <span>Feinkost</span></a>
+        <a href="index.html" class="logo"><img src="images/kayalogo-wide.png" alt="Kaya Feinkost"></a>
         <ul class="nav-links">
             <li><a href="index.html">Start</a></li>
             <li><a href="spezialitaeten.html">Spezialitäten</a></li>
             <li><a href="qualitaet.html">Qualität</a></li>
             <li><a href="ueber-uns.html" class="active">Über uns</a></li>
+            <li><a href="standorte/index.html">Standorte</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="spezialitaeten.html">Spezialitäten</a></li>
+            <li><a href="qualitaet.html">Qualität</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="standorte/index.html">Standorte</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+    </div>
 
     <!-- Page Header -->
     <header class="page-header">
@@ -796,7 +960,7 @@
                     nur die frischesten Zutaten und bereiten alles mit Sorgfalt und Hingabe zu.
                 </p>
                 <p>
-                    Von unserem handgemachten Döner bis zu unserer cremigen Pasta – jedes Gericht
+                    Von unseren handverlesenen Oliven bis zu unseren hausgemachten Pasten – jede Spezialität
                     erzählt eine Geschichte von Tradition, Leidenschaft und Handwerkskunst.
                 </p>
             </div>
@@ -832,44 +996,44 @@
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="timeline-header-row">
-                        <div class="timeline-icon">🚀</div>
+                        <div class="timeline-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
                         <span class="timeline-year" data-target="2009">0</span>
                     </div>
                     <h3>Die Gründung</h3>
-                    <p>Mit einem kleinen Imbiss und großen Träumen öffneten wir unsere ersten Türen.</p>
+                    <p>Mit einem kleinen Feinkost-Stand und großen Träumen öffneten wir unsere ersten Türen.</p>
                 </div>
             </div>
             <div class="timeline-item" data-year="2013">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="timeline-header-row">
-                        <div class="timeline-icon">🍝</div>
+                        <div class="timeline-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
                         <span class="timeline-year" data-target="2013">0</span>
                     </div>
-                    <h3>Pasta trifft Döner</h3>
-                    <p>Wir erweiterten unser Menü um italienische Klassiker und schufen unsere einzigartige Fusion-Küche.</p>
+                    <h3>Erweiterung des Sortiments</h3>
+                    <p>Wir erweiterten unser Angebot um mediterrane Spezialitäten und hausgemachte Pasten.</p>
                 </div>
             </div>
             <div class="timeline-item" data-year="2017">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="timeline-header-row">
-                        <div class="timeline-icon">🏠</div>
+                        <div class="timeline-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
                         <span class="timeline-year" data-target="2017">0</span>
                     </div>
                     <h3>Neues Zuhause</h3>
-                    <p>Umzug in unser heutiges Restaurant mit mehr Platz für unsere wachsende Gästefamilie.</p>
+                    <p>Umzug in unsere heutigen Standorte mit mehr Platz für unsere wachsende Gästefamilie.</p>
                 </div>
             </div>
             <div class="timeline-item" data-year="2024">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <div class="timeline-header-row">
-                        <div class="timeline-icon">🎉</div>
+                        <div class="timeline-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
                         <span class="timeline-year" data-target="2024">0</span>
                     </div>
-                    <h3>15 Jahre Jubiläum</h3>
-                    <p>Ein Meilenstein! Wir feiern 15 Jahre Leidenschaft für gutes Essen.</p>
+                    <h3>7 Standorte</h3>
+                    <p>Ein Meilenstein! Wir sind jetzt an 7 Standorten für Sie da.</p>
                 </div>
             </div>
         </div>
@@ -882,22 +1046,22 @@
         </div>
         <div class="team-grid">
             <div class="team-card reveal">
-                <div class="team-avatar">👨‍🍳</div>
+                <div class="team-avatar"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M8 4c0-1 1-2 4-2s4 1 4 2"/></svg></div>
                 <h3>Mehmet Kaya</h3>
                 <p class="team-role">Gründer & Küchenchef</p>
-                <p>Mit über 25 Jahren Erfahrung bringt Mehmet die Seele in jedes Gericht.</p>
+                <p>Mit über 25 Jahren Erfahrung bringt Mehmet die Seele in jede Spezialität.</p>
             </div>
             <div class="team-card reveal">
-                <div class="team-avatar">👩‍🍳</div>
+                <div class="team-avatar"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M9 8c0-2 1.5-4 3-4s3 2 3 4"/></svg></div>
                 <h3>Ayse Kaya</h3>
                 <p class="team-role">Geschäftsführung</p>
                 <p>Ayse sorgt für den reibungslosen Ablauf und ein herzliches Willkommen.</p>
             </div>
             <div class="team-card reveal">
-                <div class="team-avatar">🧑‍🍳</div>
-                <h3>Marco Rossi</h3>
-                <p class="team-role">Pasta-Meister</p>
-                <p>Unser italienischer Koch bringt echte mediterrane Tradition in unsere Küche.</p>
+                <div class="team-avatar"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M14 4c1 .5 2 1.5 2 3"/></svg></div>
+                <h3>Das Team</h3>
+                <p class="team-role">Feinkost-Experten</p>
+                <p>Unser engagiertes Team bringt echte mediterrane Tradition an unsere Theken.</p>
             </div>
         </div>
     </section>
@@ -909,22 +1073,22 @@
         </div>
         <div class="values-grid">
             <div class="value-card reveal">
-                <div class="value-icon">🌿</div>
+                <div class="value-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5"><path d="M12 2L9 9H2l6 5-2 8 6-4 6 4-2-8 6-5h-7L12 2z" fill="none"/><path d="M7 16c-1-2-1-5 2-7 2-1 3 0 3 0s1-1 3 0c3 2 3 5 2 7"/></svg></div>
                 <h3>Frische</h3>
                 <p>Täglich frische Zutaten von regionalen Lieferanten</p>
             </div>
             <div class="value-card reveal">
-                <div class="value-icon">❤️</div>
+                <div class="value-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
                 <h3>Leidenschaft</h3>
-                <p>Mit Liebe und Hingabe in jedem Gericht</p>
+                <p>Mit Liebe und Hingabe in jeder Spezialität</p>
             </div>
             <div class="value-card reveal">
-                <div class="value-icon">🤝</div>
+                <div class="value-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
                 <h3>Familie</h3>
                 <p>Jeder Gast ist Teil unserer Familie</p>
             </div>
             <div class="value-card reveal">
-                <div class="value-icon">✨</div>
+                <div class="value-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
                 <h3>Qualität</h3>
                 <p>Keine Kompromisse bei Geschmack und Zutaten</p>
             </div>
@@ -945,6 +1109,13 @@
         </div>
     </section>
 
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="lenis.scrollTo(0, { duration: 2 })">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </div>
+
     <!-- Footer -->
     <footer style="background: url('images/holzdunkel.png') center/cover no-repeat;">
         <div class="footer-logo">Kaya <span>Feinkost</span></div>
@@ -954,7 +1125,7 @@
             <a href="#">Instagram</a>
             <a href="#">Facebook</a>
         </div>
-        <p class="footer-copy">© 2025 Kaya Feinkost. Alle Rechte vorbehalten.</p>
+        <p class="footer-copy">© 2026 Kaya Feinkost. Alle Rechte vorbehalten.</p>
     </footer>
 
     <!-- GSAP & Lenis -->
@@ -1146,6 +1317,34 @@
                     });
                 });
             });
+        }
+
+        // Scroll to Top Button visibility
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        if (scrollTopBtn) {
+            ScrollTrigger.create({
+                start: 'top -400',
+                end: 99999,
+                onEnter: () => scrollTopBtn.classList.add('visible'),
+                onLeaveBack: () => scrollTopBtn.classList.remove('visible')
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('.mobile-nav');
+            const overlay = document.querySelector('.mobile-nav-overlay');
+
+            toggle.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
     </script>
 </body>

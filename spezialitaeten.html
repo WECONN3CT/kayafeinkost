@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spezialitäten | Kaya Feinkost</title>
+    <title>Speisekarte | Kaya Feinkost</title>
+    <meta name="description" content="Unsere mediterranen Spezialitäten: Hausgemachte Pasten, marinierte Oliven, frische Antipasti, Salate, Börek und Simit. Täglich frisch zubereitet.">
+    <meta name="keywords" content="Pasten, Hummus, Oliven, Antipasti, Salate, Börek, Simit, Feinkost, Mediterran">
+    <meta property="og:title" content="Speisekarte | Kaya Feinkost">
+    <meta property="og:description" content="Hausgemachte mediterrane Spezialitäten - Pasten, Oliven, Antipasti, Salate und mehr.">
+    <link rel="canonical" href="https://kaya-feinkost.de/spezialitaeten.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -75,15 +80,18 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--charcoal);
-            text-decoration: none;
-            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
         }
 
-        .logo span {
-            color: var(--sage);
+        .logo img {
+            height: 45px;
+            width: auto;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .logo img {
+            height: 40px;
         }
 
         .nav-links {
@@ -120,6 +128,99 @@
 
         .nav-links a.active {
             color: var(--sage);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--cream);
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 999;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--wood-light);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--sage);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
         }
 
         /* Page Header */
@@ -180,13 +281,13 @@
         }
 
         .menu-tab {
-            padding: 1rem 2rem;
+            padding: 0.5rem 1.2rem;
             background: transparent;
             border: 1px solid var(--wood-light);
-            border-radius: 50px;
+            border-radius: 25px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
             cursor: pointer;
             transition: all 0.3s ease;
             color: var(--text);
@@ -230,7 +331,11 @@
         }
 
         .section-title-icon {
-            font-size: 2.5rem;
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .section-title p {
@@ -287,7 +392,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
             flex-shrink: 0;
         }
 
@@ -354,94 +458,6 @@
         .menu-tag.spicy {
             background: #FFF3E0;
             color: #E65100;
-        }
-
-        /* Special Offer Banner */
-        .special-offer {
-            margin: 4rem auto;
-            max-width: 1000px;
-            padding: 3rem;
-            background: linear-gradient(135deg, var(--wood), var(--wood-medium));
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            color: white;
-        }
-
-        .special-offer-content h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .special-offer-content p {
-            opacity: 0.9;
-        }
-
-        .special-offer-price {
-            text-align: center;
-        }
-
-        .special-offer-price .old-price {
-            font-size: 1.2rem;
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-
-        .special-offer-price .new-price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 600;
-        }
-
-        /* Drinks Section */
-        .drinks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .drink-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            background: white;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .drink-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .drink-name {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .drink-icon {
-            font-size: 1.5rem;
-        }
-
-        .drink-item h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            color: var(--charcoal);
-        }
-
-        .drink-item span {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        .drink-price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            color: var(--sage);
         }
 
         /* Info Note */
@@ -522,15 +538,6 @@
             background: linear-gradient(90deg, var(--sage), var(--sage-light), var(--sage));
         }
 
-        .wood-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
         .footer-logo {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
@@ -579,11 +586,6 @@
             .menu-grid {
                 grid-template-columns: 1fr;
             }
-
-            .special-offer {
-                flex-direction: column;
-                text-align: center;
-            }
         }
 
         @media (max-width: 768px) {
@@ -611,8 +613,8 @@
             }
 
             .menu-tab {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.75rem;
+                padding: 0.4rem 1rem;
+                font-size: 0.7rem;
             }
 
             .menu-item {
@@ -629,10 +631,42 @@
             .menu-item-tags {
                 justify-content: center;
             }
+        }
 
-            .drinks-grid {
-                grid-template-columns: 1fr;
-            }
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            z-index: 900;
+            box-shadow: 0 10px 30px rgba(122, 158, 126, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: var(--sage-dark);
+            transform: translateY(-5px);
+        }
+
+        .scroll-top svg {
+            stroke: white;
         }
 
         /* Animations */
@@ -645,455 +679,798 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <a href="index.html" class="logo">Kaya <span>Feinkost</span></a>
+        <a href="index.html" class="logo"><img src="images/kayalogo-wide.png" alt="Kaya Feinkost"></a>
         <ul class="nav-links">
             <li><a href="index.html">Start</a></li>
             <li><a href="spezialitaeten.html" class="active">Spezialitäten</a></li>
             <li><a href="qualitaet.html">Qualität</a></li>
             <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="standorte/index.html">Standorte</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="spezialitaeten.html">Spezialitäten</a></li>
+            <li><a href="qualitaet.html">Qualität</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="standorte/index.html">Standorte</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+    </div>
 
     <!-- Page Header -->
     <header class="page-header">
-        <h1>Unsere <span>Spezialitäten</span></h1>
-        <p>Von traditionellem Döner bis zu italienischer Pasta – entdecken Sie unsere kulinarische Vielfalt.</p>
+        <h1>Unsere <span>Speisekarte</span></h1>
+        <p>Handverlesene mediterrane Köstlichkeiten, frisch zubereitet und liebevoll präsentiert.</p>
     </header>
+
+    <!-- Hero Image Showcase -->
+    <section style="padding: 0 4rem 4rem; max-width: 1200px; margin: 0 auto;">
+        <div style="position: relative; border-radius: 30px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.15);">
+            <img loading="lazy" src="images/produkte/theke.jpg" alt="Unsere Feinkost-Theke" style="width: 100%; height: 400px; object-fit: cover; display: block;">
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 3rem; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white;">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 0.5rem;">Frisch an der Theke</h3>
+                <p style="opacity: 0.9; font-size: 1rem;">Täglich frisch zubereitet — wählen Sie aus unserem vielfältigen Angebot</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Menu Categories Navigation -->
     <div class="menu-nav">
         <div class="menu-categories">
             <button class="menu-tab active" data-category="all">Alle</button>
-            <button class="menu-tab" data-category="doener">Döner</button>
-            <button class="menu-tab" data-category="pasta">Pasta</button>
+            <button class="menu-tab" data-category="drehspiess">Drehspieß</button>
+            <button class="menu-tab" data-category="falafel">Falafel</button>
+            <button class="menu-tab" data-category="tagesgericht">Tagesgerichte</button>
+            <button class="menu-tab" data-category="borek">Börek & Salate</button>
+            <button class="menu-tab" data-category="snacks">Snacks</button>
+            <button class="menu-tab" data-category="pasten">Pasten</button>
+            <button class="menu-tab" data-category="oliven">Oliven</button>
+            <button class="menu-tab" data-category="antipasti">Antipasti</button>
             <button class="menu-tab" data-category="salate">Salate</button>
-            <button class="menu-tab" data-category="beilagen">Beilagen</button>
-            <button class="menu-tab" data-category="getraenke">Getränke</button>
+            <button class="menu-tab" data-category="gebaeck">Gebäck</button>
         </div>
     </div>
 
-    <!-- Döner Section -->
-    <section class="menu-section" id="doener">
+    <!-- Drehspießgerichte Section -->
+    <section class="menu-section" id="drehspiess">
         <div class="section-title reveal">
-            <h2><span class="section-title-icon">🥙</span> Döner <span>Spezialitäten</span></h2>
-            <p>Traditionell mariniert, täglich frisch zubereitet</p>
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M8 6h8M6 10h12M7 14h10M9 18h6"/></svg></span> Drehspieß<span>gerichte</span></h2>
+            <p>Unsere beliebten Klassiker vom Drehspieß</p>
         </div>
         <div class="menu-grid">
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🥙</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2v20M8 6h8M6 10h12M7 14h10M9 18h6"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Classic Döner</h3>
-                        <span class="menu-item-price">€7,50</span>
+                        <h3>Drehspießtasche</h3>
                     </div>
-                    <p class="menu-item-desc">Zartes Dönerfleisch, frisches Gemüse, hausgemachte Saucen im knusprigen Fladenbrot</p>
+                    <p class="menu-item-desc">Frisches Fladenbrot gefüllt mit saftigem Drehspießfleisch, knackigem Salat und hausgemachter Sauce.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag popular">Beliebt</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🌯</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2v20M8 6h8M6 10h12M7 14h10M9 18h6"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Döner Dürüm</h3>
-                        <span class="menu-item-price">€8,00</span>
+                        <h3>Drehspießtasche Jumbo</h3>
                     </div>
-                    <p class="menu-item-desc">Dönerfleisch gerollt im dünnen Yufka-Fladen mit Salat und Saucen nach Wahl</p>
+                    <p class="menu-item-desc">Extra große Portion mit Drehspießfleisch, frischem Salat und Sauce — für den großen Hunger.</p>
                     <div class="menu-item-tags">
-                        <span class="menu-tag">Klassiker</span>
+                        <span class="menu-tag">XL Portion</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🍽️</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Döner Teller</h3>
-                        <span class="menu-item-price">€11,90</span>
+                        <h3>Dürüm Drehspieß</h3>
                     </div>
-                    <p class="menu-item-desc">Großzügige Portion Dönerfleisch mit Reis, Salat, gegrilltem Gemüse und Saucen</p>
+                    <p class="menu-item-desc">Dünnes Fladenbrot gerollt mit Drehspießfleisch, Salat und Sauce — optional mit Weichkäse.</p>
                     <div class="menu-item-tags">
-                        <span class="menu-tag">Reichhaltig</span>
+                        <span class="menu-tag popular">Klassiker</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🥗</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Döner Bowl</h3>
-                        <span class="menu-item-price">€10,50</span>
+                        <h3>Drehspieß-Teller</h3>
                     </div>
-                    <p class="menu-item-desc">Reis-Bowl mit mariniertem Dönerfleisch, Hummus, Tabouleh und Tahini-Dressing</p>
+                    <p class="menu-item-desc">Drehspießfleisch serviert mit frischem Salat und Sauce — optional mit Pommes oder Reis.</p>
                     <div class="menu-item-tags">
-                        <span class="menu-tag new">Neu</span>
+                        <span class="menu-tag">Sättigend</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🍖</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="4" y="8" width="16" height="8" rx="1"/><path d="M8 8V6M16 8V6"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Döner Box</h3>
-                        <span class="menu-item-price">€9,50</span>
+                        <h3>Pomm-Box</h3>
                     </div>
-                    <p class="menu-item-desc">Dönerfleisch mit Pommes, frischem Salat und zwei Saucen nach Wahl</p>
+                    <p class="menu-item-desc">Knusprige Pommes mit Drehspießfleisch und leckerer Sauce — perfekt für unterwegs.</p>
                     <div class="menu-item-tags">
-                        <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag">To-Go</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🌶️</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><ellipse cx="12" cy="12" rx="10" ry="6"/><path d="M12 6v12"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Spicy Döner</h3>
-                        <span class="menu-item-price">€8,00</span>
+                        <h3>Lahmacun</h3>
                     </div>
-                    <p class="menu-item-desc">Klassischer Döner mit scharfer Harissa-Sauce, Jalapeños und Peperoni</p>
+                    <p class="menu-item-desc">Türkische Pizza — dünn und knusprig. Einfach, mit Salat, mit Weichkäse oder mit Drehspieß.</p>
                     <div class="menu-item-tags">
-                        <span class="menu-tag spicy">Scharf</span>
+                        <span class="menu-tag popular">Türkisch</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pasta Section -->
-    <section class="menu-section" id="pasta">
+    <!-- Falafel Section -->
+    <section class="menu-section" id="falafel">
         <div class="section-title reveal">
-            <h2><span class="section-title-icon">🍝</span> Pasta <span>Kreationen</span></h2>
-            <p>Italienische Klassiker mit mediterranem Flair</p>
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></span> Falafel <span>& Co.</span></h2>
+            <p>Vegetarische Köstlichkeiten — knusprig und aromatisch</p>
         </div>
         <div class="menu-grid">
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🍝</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Pasta Pomodoro</h3>
-                        <span class="menu-item-price">€9,90</span>
+                        <h3>Falafeltasche</h3>
                     </div>
-                    <p class="menu-item-desc">Hausgemachte Pasta mit sonnengereiften Tomaten, frischem Basilikum und Parmigiano</p>
+                    <p class="menu-item-desc">Knusprige Falafel im Fladenbrot mit frischem Salat und cremiger Sauce.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="12" r="2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Falafel-Dürüm</h3>
+                    </div>
+                    <p class="menu-item-desc">Gerolltes Fladenbrot mit Falafel, Salat und Sauce — optional mit Weichkäse.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag vegan">Vegetarisch</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🥓</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Pasta Carbonara</h3>
-                        <span class="menu-item-price">€11,90</span>
+                        <h3>Falafel-Teller</h3>
                     </div>
-                    <p class="menu-item-desc">Cremige Carbonara mit Guanciale, Eigelb und frisch geriebenem Pecorino</p>
+                    <p class="menu-item-desc">Hausgemachte Falafel mit Salat, Pommes und Sauce — vegetarischer Genuss.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                        <span class="menu-tag">Sättigend</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Vegetarisch-Tasche</h3>
+                    </div>
+                    <p class="menu-item-desc">Frisches Fladenbrot gefüllt mit buntem Salat und Sauce — leicht und lecker.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                        <span class="menu-tag">Leicht</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Dürüm Vegetarisch</h3>
+                    </div>
+                    <p class="menu-item-desc">Gerolltes Fladenbrot mit frischem Salat und Sauce — die vegetarische Alternative.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tagesgerichte Section -->
+    <section class="menu-section" id="tagesgericht">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></span> Tages<span>gerichte</span></h2>
+            <p>Täglich wechselnde Auswahl — frisch zubereitet</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Tagesgericht</h3>
+                    </div>
+                    <p class="menu-item-desc">Täglich wechselndes Gericht mit einer Beilage Ihrer Wahl — fragen Sie nach dem heutigen Angebot.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Täglich neu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Tagesgericht Vegetarisch</h3>
+                    </div>
+                    <p class="menu-item-desc">Vegetarisches Tagesgericht — täglich frisch zubereitet.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 3C7 8 7 16 12 21M12 3c5 5 5 13 0 18"/><ellipse cx="12" cy="12" rx="9" ry="4"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Nudelgericht</h3>
+                    </div>
+                    <p class="menu-item-desc">Täglich wechselndes Nudelgericht — hausgemacht und lecker.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Hausgemacht</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M8 8h8M8 16h8"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Mix-Teller</h3>
+                    </div>
+                    <p class="menu-item-desc">Eine Auswahl unserer besten Spezialitäten auf einem Teller — perfekt zum Probieren.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Empfehlung</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M2 12h20M12 2c-3 4-3 8 0 10s3 6 0 10"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Fischgericht</h3>
+                    </div>
+                    <p class="menu-item-desc">Frisches Fischgericht — nur freitags erhältlich.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Freitags</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Börek & Salate Section -->
+    <section class="menu-section" id="borek">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="10" rx="2"/><path d="M7 8V6a5 5 0 0 1 10 0v2"/></svg></span> Börek <span>& Salate</span></h2>
+            <p>Hausgemachtes Gebäck und frische Salate</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="8" width="18" height="10" rx="2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Su Börek</h3>
+                    </div>
+                    <p class="menu-item-desc">Traditionelle türkische Nudelteigspezialität — zart und saftig.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Hausgemacht</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><ellipse cx="12" cy="12" rx="9" ry="5"/><path d="M3 12h18"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Kol Börek</h3>
+                    </div>
+                    <p class="menu-item-desc">Gerollter Blätterteig mit Schafskäse — klein oder groß erhältlich.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Knusprig</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Blätterteigröllchen</h3>
+                    </div>
+                    <p class="menu-item-desc">Knusprige Röllchen aus feinem Blätterteig — der perfekte Snack.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Snack</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v12M6 12h12"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Gemüsereibekuchen</h3>
+                    </div>
+                    <p class="menu-item-desc">Knusprig gebratene Reibekuchen mit Gemüse — einzeln oder im Set.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Salatschale</h3>
+                    </div>
+                    <p class="menu-item-desc">Frischer Salat mit Thunfisch, Käse oder Drehspießfleisch — leicht und sättigend.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Frisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>4 Salate Ihrer Wahl</h3>
+                    </div>
+                    <p class="menu-item-desc">Wählen Sie 4 verschiedene Salate aus unserer Theke — Vielfalt nach Ihrem Geschmack.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Theken-Auswahl</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Snacks Section -->
+    <section class="menu-section" id="snacks">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="16" height="10" rx="2"/><path d="M8 8V6M16 8V6M4 14h16"/></svg></span> Snacks <span>& Beilagen</span></h2>
+            <p>Kleine Leckereien für zwischendurch</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="4" y="8" width="16" height="10" rx="2"/><path d="M8 8V6M16 8V6M4 14h16"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Chicken Nuggets Box</h3>
+                    </div>
+                    <p class="menu-item-desc">Knusprige Chicken Nuggets — als 6er oder 9er Box erhältlich.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag popular">Beliebt</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🥬</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Pasta Primavera</h3>
-                        <span class="menu-item-price">€9,50</span>
+                        <h3>Falafel Box</h3>
                     </div>
-                    <p class="menu-item-desc">Frische Pasta mit saisonalem Gemüse in leichter Olivenöl-Knoblauch-Sauce</p>
+                    <p class="menu-item-desc">Hausgemachte Falafel — als 6er oder 9er Box, auch einzeln erhältlich.</p>
                     <div class="menu-item-tags">
+                        <span class="menu-tag vegan">Vegetarisch</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 18h16M6 14h12M8 10h8M10 6h4"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Pommes</h3>
+                    </div>
+                    <p class="menu-item-desc">Knusprige Pommes frites — klein oder groß, mit Ketchup oder Mayo.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Beilage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pasten Section -->
+    <section class="menu-section" id="pasten">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></span> Hausgemachte <span>Pasten</span></h2>
+            <p>Cremige Dips und Aufstriche nach traditionellen Rezepten</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Hummus Classic</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Cremiger Kichererbsen-Dip mit Tahini, Zitrone und feinem Olivenöl. Ein Klassiker der orientalischen Küche.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
                         <span class="menu-tag vegan">Vegan</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🍖</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Pasta Bolognese</h3>
-                        <span class="menu-item-price">€10,90</span>
+                        <h3>Acuka</h3>
+                        <span class="menu-item-price">100g</span>
                     </div>
-                    <p class="menu-item-desc">Klassische Bolognese mit hausgemachtem Ragù aus Rinderhack und Tomaten</p>
+                    <p class="menu-item-desc">Würzige Walnuss-Paprika-Paste nach türkischer Art. Perfekt als Brotaufstrich oder Dip.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag spicy">Würzig</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2 2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Muhammara</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Syrische Paprika-Walnuss-Creme mit Granatapfelsirup. Süß-würzig und unwiderstehlich.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Orientalisch</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12h8"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Baba Ganoush</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Rauchige Auberginen-Creme mit Tahini, Knoblauch und frischer Petersilie. Ein Muss für Auberginen-Liebhaber.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Tzatziki</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Griechischer Joghurt-Dip mit Gurke, Knoblauch und frischem Dill. Erfrischend und cremig.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag">Klassiker</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🦐</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Pasta Frutti di Mare</h3>
-                        <span class="menu-item-price">€14,90</span>
+                        <h3>Chef-Paste</h3>
+                        <span class="menu-item-price">100g</span>
                     </div>
-                    <p class="menu-item-desc">Meeresfrüchte-Pasta mit Garnelen, Muscheln und Calamari in Weißweinsauce</p>
+                    <p class="menu-item-desc">Unsere Hauskreation mit geheimen Gewürzen. Eine einzigartige Mischung, die Sie nur bei uns finden.</p>
                     <div class="menu-item-tags">
+                        <span class="menu-tag new">Hausrezept</span>
+                        <span class="menu-tag popular">Beliebt</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oliven Section -->
+    <section class="menu-section" id="oliven">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="12" rx="4" ry="6"/><path d="M12 6c-2 0-4-2-4-4"/></svg></span> Marinierte <span>Oliven</span></h2>
+            <p>Handverlesene Oliven in verschiedenen Variationen</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><ellipse cx="12" cy="12" rx="4" ry="6"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Kalamata Oliven</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Griechische Kalamata-Oliven, mariniert in nativem Olivenöl mit Kräutern der Provence.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Gefüllte Oliven</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Grüne Oliven gefüllt mit Mandeln, Paprika oder Knoblauch. Ein mediterraner Genuss.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Premium</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><ellipse cx="12" cy="10" rx="5" ry="7"/><path d="M12 3v14"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Grüne Oliven Natur</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Knackige grüne Oliven in milder Salzlake. Der pure Olivengeschmack für Puristen.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Klassiker</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><ellipse cx="12" cy="12" rx="6" ry="4"/><path d="M6 12h12"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Schwarze Oliven</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Vollreife schwarze Oliven, sonnengetrocknet und in Olivenöl eingelegt. Intensiv aromatisch.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Intensiv</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Antipasti Section -->
+    <section class="menu-section" id="antipasti">
+        <div class="section-title reveal">
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h10M7 14h6"/></svg></span> Feine <span>Antipasti</span></h2>
+            <p>Mariniertes Gemüse und mediterrane Vorspeisen</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Gegrillte Paprika</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Über Holzkohle gegrillte Paprika, mariniert in Knoblauchöl mit frischen Kräutern.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Gefüllte Weinblätter</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Zarte Weinblätter gefüllt mit gewürztem Reis, Pinienkernen und frischen Kräutern.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Getrocknete Tomaten</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Sonnengetrocknete Tomaten in Olivenöl mit Basilikum und Knoblauch. Intensiv und aromatisch.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Mediterran</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Marinierte Artischocken</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Zarte Artischockenherzen in Zitronen-Kräuter-Marinade. Eine italienische Delikatesse.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Premium</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 12c0 4.4-3.6 8-8 8s-8-3.6-8-8c0-5.3 8-12 8-12s8 6.7 8 12z"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Marinierte Garnelen</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Saftige Riesengarnelen in mediterraner Knoblauchmarinade mit Chili und frischer Petersilie.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag new">Neu</span>
                         <span class="menu-tag">Premium</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🧀</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Pasta Quattro Formaggi</h3>
-                        <span class="menu-item-price">€11,50</span>
+                        <h3>Gegrillte Zucchini</h3>
+                        <span class="menu-item-price">100g</span>
                     </div>
-                    <p class="menu-item-desc">Cremige Vier-Käse-Sauce mit Gorgonzola, Parmesan, Mozzarella und Pecorino</p>
+                    <p class="menu-item-desc">Gegrillte Zucchini-Scheiben mariniert mit Minze, Knoblauch und Balsamico.</p>
                     <div class="menu-item-tags">
-                        <span class="menu-tag vegan">Vegetarisch</span>
+                        <span class="menu-tag">Leicht</span>
+                        <span class="menu-tag vegan">Vegan</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Special Offer -->
-    <div class="special-offer reveal">
-        <div class="special-offer-content">
-            <h3>Mittagsmenü</h3>
-            <p>Montag bis Freitag, 11:00 - 15:00 Uhr<br>Hauptgericht + Getränk + Dessert</p>
-        </div>
-        <div class="special-offer-price">
-            <span class="old-price">€16,90</span>
-            <span class="new-price">€12,90</span>
-        </div>
-    </div>
 
     <!-- Salate Section -->
     <section class="menu-section" id="salate">
         <div class="section-title reveal">
-            <h2><span class="section-title-icon">🥗</span> Frische <span>Salate</span></h2>
-            <p>Knackig, gesund und voller Geschmack</p>
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 6c-2 0-4 2-4 6s2 6 4 6 4-2 4-6-2-6-4-6z"/></svg></span> Frische <span>Salate</span></h2>
+            <p>Knackige Salate nach mediterraner Art</p>
         </div>
         <div class="menu-grid">
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🥗</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Döner Salat</h3>
-                        <span class="menu-item-price">€8,90</span>
+                        <h3>Frühlingssalat</h3>
+                        <span class="menu-item-price">100g</span>
                     </div>
-                    <p class="menu-item-desc">Knackiger Salat mit saftigen Dönerstreifen, Feta und Granatapfelkernen</p>
+                    <p class="menu-item-desc">Knackiger Salat mit frischem Gemüse der Saison, Kräutern und hausgemachtem Dressing.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag vegan">Vegan</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🧀</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Caesar Salad</h3>
-                        <span class="menu-item-price">€9,50</span>
+                        <h3>Tabouleh</h3>
+                        <span class="menu-item-price">100g</span>
                     </div>
-                    <p class="menu-item-desc">Römersalat mit Parmesan, Croutons und hausgemachtem Caesar-Dressing</p>
+                    <p class="menu-item-desc">Klassischer libanesischer Petersiliensalat mit Bulgur, Tomaten, Minze und Zitronendressing.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Orientalisch</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Couscous-Salat</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Fluffiger Couscous mit Paprika, Zucchini, Rosinen und orientalischen Gewürzen.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag">Sättigend</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Weißkraut-Salat</h3>
+                        <span class="menu-item-price">100g</span>
+                    </div>
+                    <p class="menu-item-desc">Türkischer Krautsalat mit Karotten und einer leichten Essig-Öl-Marinade. Knackig und erfrischend.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag">Klassiker</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🍅</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Griechischer Salat</h3>
-                        <span class="menu-item-price">€7,90</span>
-                    </div>
-                    <p class="menu-item-desc">Tomaten, Gurken, Oliven, Zwiebeln und Feta mit Oregano und Olivenöl</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag vegan">Vegetarisch</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🥑</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Avocado Bowl</h3>
-                        <span class="menu-item-price">€10,50</span>
-                    </div>
-                    <p class="menu-item-desc">Quinoa, Avocado, Kichererbsen, Kirschtomaten und Tahini-Dressing</p>
-                    <div class="menu-item-tags">
                         <span class="menu-tag vegan">Vegan</span>
-                        <span class="menu-tag new">Neu</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Beilagen Section -->
-    <section class="menu-section" id="beilagen">
+    <!-- Gebäck Section -->
+    <section class="menu-section" id="gebaeck">
         <div class="section-title reveal">
-            <h2><span class="section-title-icon">🍟</span> Beilagen & <span>Extras</span></h2>
-            <p>Die perfekte Ergänzung zu Ihrem Hauptgericht</p>
+            <h2><span class="section-title-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> Türkisches <span>Gebäck</span></h2>
+            <p>Frisch gebackene Spezialitäten aus dem Ofen</p>
         </div>
         <div class="menu-grid">
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🍟</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Pommes Frites</h3>
-                        <span class="menu-item-price">€3,50</span>
+                        <h3>Simit</h3>
+                        <span class="menu-item-price">Stück</span>
                     </div>
-                    <p class="menu-item-desc">Knusprig goldene Pommes aus frischen Kartoffeln</p>
+                    <p class="menu-item-desc">Traditioneller türkischer Sesamring, knusprig gebacken. Perfekt zum Frühstück oder als Snack.</p>
+                    <div class="menu-item-tags">
+                        <span class="menu-tag popular">Beliebt</span>
+                        <span class="menu-tag vegan">Vegan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item reveal">
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h12"/></svg></div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h3>Börek mit Käse</h3>
+                        <span class="menu-item-price">Stück</span>
+                    </div>
+                    <p class="menu-item-desc">Blätterteigröllchen gefüllt mit Feta und frischen Kräutern. Knusprig und herzhaft.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag popular">Beliebt</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🧆</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 10h8M8 14h6"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Falafel (4 Stk.)</h3>
-                        <span class="menu-item-price">€4,50</span>
+                        <h3>Börek mit Spinat</h3>
+                        <span class="menu-item-price">Stück</span>
                     </div>
-                    <p class="menu-item-desc">Hausgemachte knusprige Falafel aus Kichererbsen mit Kräutern</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag vegan">Vegan</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🥖</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Knoblauchbrot</h3>
-                        <span class="menu-item-price">€3,00</span>
-                    </div>
-                    <p class="menu-item-desc">Frisch gebackenes Brot mit hausgemachter Kräuterbutter</p>
+                    <p class="menu-item-desc">Knuspriger Yufka-Teig gefüllt mit würzigem Spinat und Zwiebeln. Ein vegetarischer Klassiker.</p>
                     <div class="menu-item-tags">
                         <span class="menu-tag vegan">Vegetarisch</span>
                     </div>
                 </div>
             </div>
             <div class="menu-item reveal">
-                <div class="menu-item-icon">🥣</div>
+                <div class="menu-item-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 12h16M4 6h16M4 18h16"/></svg></div>
                 <div class="menu-item-content">
                     <div class="menu-item-header">
-                        <h3>Hummus</h3>
-                        <span class="menu-item-price">€4,00</span>
+                        <h3>Börek mit Hackfleisch</h3>
+                        <span class="menu-item-price">Stück</span>
                     </div>
-                    <p class="menu-item-desc">Cremiger Hummus serviert mit warmem Fladenbrot</p>
+                    <p class="menu-item-desc">Herzhaftes Blätterteiggebäck gefüllt mit gewürztem Rinderhackfleisch und Zwiebeln.</p>
                     <div class="menu-item-tags">
-                        <span class="menu-tag vegan">Vegan</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🍚</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Reis</h3>
-                        <span class="menu-item-price">€2,50</span>
-                    </div>
-                    <p class="menu-item-desc">Orientalisch gewürzter Basmatireis mit Safran</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag vegan">Vegan</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🥒</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Tzatziki</h3>
-                        <span class="menu-item-price">€2,00</span>
-                    </div>
-                    <p class="menu-item-desc">Hausgemachter griechischer Joghurt-Dip mit Gurke und Knoblauch</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag vegan">Vegetarisch</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Getränke Section -->
-    <section class="menu-section" id="getraenke">
-        <div class="section-title reveal">
-            <h2><span class="section-title-icon">🥤</span> Erfrischende <span>Getränke</span></h2>
-            <p>Von hausgemachtem Ayran bis zu italienischem Espresso</p>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🥛</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Ayran</h3>
-                        <span class="menu-item-price">€2,50</span>
-                    </div>
-                    <p class="menu-item-desc">Traditionelles türkisches Joghurtgetränk, frisch zubereitet und leicht gesalzen</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag popular">Beliebt</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🍋</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Hausgemachte Limonade</h3>
-                        <span class="menu-item-price">€3,50</span>
-                    </div>
-                    <p class="menu-item-desc">Erfrischende Limonade aus frisch gepressten Zitronen oder mit frischer Minze</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag new">Neu</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">☕</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Espresso</h3>
-                        <span class="menu-item-price">€2,00</span>
-                    </div>
-                    <p class="menu-item-desc">Kräftiger italienischer Espresso aus hochwertiger Arabica-Röstung</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag">Klassiker</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🫖</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Türkischer Tee</h3>
-                        <span class="menu-item-price">€2,00</span>
-                    </div>
-                    <p class="menu-item-desc">Traditioneller schwarzer Tee, serviert im typischen Glas mit Zucker nach Wahl</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag popular">Beliebt</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">🥤</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Softdrinks</h3>
-                        <span class="menu-item-price">€2,50</span>
-                    </div>
-                    <p class="menu-item-desc">Erfrischende Auswahl: Coca-Cola, Fanta Orange oder Sprite</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag">Klassiker</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-item reveal">
-                <div class="menu-item-icon">💧</div>
-                <div class="menu-item-content">
-                    <div class="menu-item-header">
-                        <h3>Mineralwasser</h3>
-                        <span class="menu-item-price">€2,00</span>
-                    </div>
-                    <p class="menu-item-desc">Natürliches Mineralwasser, wahlweise still oder mit Kohlensäure (0,5L)</p>
-                    <div class="menu-item-tags">
-                        <span class="menu-tag vegan">Natürlich</span>
+                        <span class="menu-tag">Herzhaft</span>
                     </div>
                 </div>
             </div>
@@ -1103,24 +1480,31 @@
     <!-- Menu Note -->
     <div class="menu-note reveal">
         <p>
-            <strong>Allergene & Zusatzstoffe:</strong> Informationen zu Allergenen und Zusatzstoffen
-            erhalten Sie auf Anfrage. Alle Preise inkl. MwSt. Änderungen vorbehalten.
+            <strong>Hinweis:</strong> Alle Produkte werden täglich frisch zubereitet. Preise nach Gewicht an der Theke.
+            Informationen zu Allergenen erhalten Sie auf Anfrage bei unseren Mitarbeitern.
         </p>
     </div>
 
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-box reveal">
-            <h2>Hunger bekommen?</h2>
-            <p>Reservieren Sie einen Tisch oder bestellen Sie zur Abholung.</p>
+            <h2>Besuchen Sie unsere Theke</h2>
+            <p>Lassen Sie sich von unserer Vielfalt inspirieren und probieren Sie unsere Spezialitäten.</p>
             <a href="kontakt.html" class="cta-btn">
-                Jetzt bestellen
+                Standorte finden
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
             </a>
         </div>
     </section>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="lenis.scrollTo(0, { duration: 2 })">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </div>
 
     <!-- Footer -->
     <footer style="background: url('images/holzdunkel.png') center/cover no-repeat;">
@@ -1131,7 +1515,7 @@
             <a href="#">Instagram</a>
             <a href="#">Facebook</a>
         </div>
-        <p class="footer-copy">© 2025 Kaya Feinkost. Alle Rechte vorbehalten.</p>
+        <p class="footer-copy">© 2026 Kaya Feinkost. Alle Rechte vorbehalten.</p>
     </footer>
 
     <!-- GSAP & Lenis -->
@@ -1230,6 +1614,34 @@
                 ScrollTrigger.refresh();
             });
         });
+
+        // Scroll to Top Button visibility
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        if (scrollTopBtn) {
+            ScrollTrigger.create({
+                start: 'top -400',
+                end: 99999,
+                onEnter: () => scrollTopBtn.classList.add('visible'),
+                onLeaveBack: () => scrollTopBtn.classList.remove('visible')
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('.mobile-nav');
+            const overlay = document.querySelector('.mobile-nav-overlay');
+
+            toggle.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
     </script>
 </body>
 </html>

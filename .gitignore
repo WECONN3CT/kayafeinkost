@@ -1,0 +1,7 @@
+# Large video files
+videos/kayahero.mp4
+
+# macOS
+.DS_Store
+**/.DS_Store
+videos/kayahero_original.mp4

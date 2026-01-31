@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaya Feinkost | Döner & Pasta</title>
+    <meta name="description" content="Kaya Feinkost - Mediterrane Feinkost-Theke mit Antipasti, Oliven, Salaten, Börek und mehr. Täglich frisch an 7 Standorten in NRW.">
+    <meta name="keywords" content="Feinkost, Mediterran, Antipasti, Oliven, Salate, Börek, Simit, Hummus, Troisdorf, Sankt Augustin, Euskirchen, Dormagen, Neuss, NRW">
+    <meta name="author" content="Kaya Feinkost">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#7A9E7E">
+    <meta property="og:title" content="Kaya Feinkost - Mediterrane Feinkost">
+    <meta property="og:description" content="Handgemachte mediterrane Spezialitäten. Antipasti, Oliven, Salate, Börek & mehr. Täglich frisch an 7 Standorten in NRW.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    <link rel="canonical" href="https://kaya-feinkost.de/">
+    <title>Kaya Feinkost | Mediterrane Feinkost</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -81,31 +92,49 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 2rem 4rem;
+            padding: 1rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+            height: auto;
         }
 
         nav.scrolled {
-            padding: 1rem 4rem;
+            padding: 0.3rem 4rem;
             background: rgba(253, 251, 247, 0.95);
             backdrop-filter: blur(20px);
             box-shadow: 0 10px 40px rgba(0,0,0,0.05);
         }
 
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--charcoal);
-            text-decoration: none;
-            letter-spacing: 0.05em;
+        nav.scrolled .logo img {
+            height: 40px;
         }
 
-        .logo span {
-            color: var(--sage);
+        nav.scrolled .logo {
+            color: var(--charcoal);
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--text);
+            text-shadow: none;
+        }
+
+        nav.scrolled .mobile-menu-toggle span {
+            background: var(--charcoal);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            transition: all 0.4s ease;
         }
 
         .nav-links {
@@ -115,13 +144,15 @@
         }
 
         .nav-links a {
-            color: var(--text);
+            color: white;
             text-decoration: none;
             font-size: 0.9rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             position: relative;
             padding: 0.5rem 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: color 0.3s ease;
         }
 
         .nav-links a::after {
@@ -130,8 +161,8 @@
             bottom: 0;
             left: 0;
             width: 0;
-            height: 1px;
-            background: var(--sage);
+            height: 2px;
+            background: var(--sage-light);
             transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -139,7 +170,110 @@
             width: 100%;
         }
 
-        /* Hero Section */
+        .nav-links a:hover {
+            color: var(--sage-light);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--cream);
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 999;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--wood-light);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--sage);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Hero Section - Video Background */
+        .hero-wrapper {
+            height: 100vh;
+            position: relative;
+        }
+
         .hero {
             height: 100vh;
             display: flex;
@@ -149,109 +283,205 @@
             overflow: hidden;
         }
 
-        .hero-bg {
+        /* Video Background */
+        .hero-video-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .hero-bg-shape {
+        .hero-video {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* Video Sound Toggle Button */
+        .video-sound-toggle {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 20;
         }
 
-        .hero-bg-shape.shape-1 {
-            top: -20%;
-            right: -10%;
-            width: 60%;
-            height: 80%;
-            background: var(--sage-light);
+        .video-sound-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
         }
 
-        .hero-bg-shape.shape-2 {
-            bottom: -20%;
-            left: -10%;
-            width: 50%;
-            height: 70%;
-            background: var(--wood-light);
-        }
-
-        .hero-bg-shape.shape-3 {
-            top: 40%;
-            left: 30%;
-            width: 30%;
-            height: 40%;
+        .video-sound-toggle.unmuted {
             background: var(--sage);
-            opacity: 0;
+            border-color: var(--sage);
         }
 
+        /* Dark overlay for better text readability */
+        .hero-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.4) 0%,
+                rgba(0, 0, 0, 0.35) 50%,
+                rgba(0, 0, 0, 0.5) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Decorative gradient accent - disabled */
+        .hero-gradient-accent {
+            display: none;
+        }
+
+        /* Hero text layers */
         .hero-content {
             text-align: center;
-            max-width: 900px;
+            max-width: 1000px;
             padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+            will-change: transform, opacity;
         }
 
         .hero-tagline {
-            font-size: 0.9rem;
-            letter-spacing: 0.3em;
+            font-size: 1rem;
+            letter-spacing: 0.5em;
             text-transform: uppercase;
-            color: var(--sage);
+            color: white;
             margin-bottom: 2rem;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-weight: 600;
         }
 
         .hero-title {
-            font-size: clamp(3rem, 7vw, 6rem);
-            line-height: 1.2;
+            font-size: clamp(4rem, 14vw, 8rem);
+            line-height: 1;
             margin-bottom: 2rem;
-            color: var(--charcoal);
-            overflow: hidden;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.8);
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
-        .hero-title .word {
-            display: inline-block;
+        .hero-title .line {
+            display: block;
             overflow: hidden;
+            padding-bottom: 0.1em;
         }
 
-        .hero-title .word-inner {
-            display: inline-block;
-            transform: translateY(100%);
+        .hero-title .line-inner {
+            display: block;
+            transform: translateY(110%);
+            will-change: transform;
         }
 
         .hero-title .accent {
-            color: var(--sage);
+            color: var(--sage-light);
+            font-style: italic;
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 500px;
+            font-size: 1.4rem;
+            color: white;
+            max-width: 700px;
             margin: 0 auto 3rem;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+            line-height: 1.8;
+            font-weight: 400;
         }
 
-        .hero-subtitle-wrapper {
-            position: relative;
-            margin: 0 auto 3rem;
-            max-width: 500px;
+        .hero .cta-btn {
+            background: white;
+            color: var(--sage-dark);
+            opacity: 0;
+            transform: translateY(20px);
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .hero-decoration-left {
+        .hero .cta-btn:hover {
+            background: var(--sage-light);
+            color: white;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Scroll indicator */
+        .hero-scroll-hint {
             position: absolute;
-            right: -200px;
-            top: 100%;
-            width: 180px;
-            height: auto;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
             opacity: 0;
-            transform: translateX(-30px) rotate(-10deg);
-            filter: drop-shadow(8px 4px 12px rgba(0, 0, 0, 0.3));
+        }
+
+        .hero-scroll-hint span {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: white;
+            animation: scrollPulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { transform: translateY(-100%); opacity: 0; }
+            30% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(300%); opacity: 0; }
         }
 
         .cta-btn {
@@ -448,56 +678,6 @@
             transform: translateY(20px);
         }
 
-        .menu-categories {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 4rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .menu-tab {
-            padding: 1rem 2.5rem;
-            background: transparent;
-            border: 1px solid var(--wood-light);
-            border-radius: 50px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-tab::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--sage);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease;
-            z-index: -1;
-        }
-
-        .menu-tab:hover::before,
-        .menu-tab.active::before {
-            width: 200%;
-            height: 200%;
-        }
-
-        .menu-tab:hover,
-        .menu-tab.active {
-            border-color: var(--sage);
-            color: white;
-        }
-
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -507,85 +687,237 @@
         }
 
         .menu-card {
-            background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 2.5rem;
             position: relative;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
             opacity: 0;
             transform: translateY(50px);
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .menu-card::before {
-            content: '';
+        /* Animated Background Layer */
+        .menu-card-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--sage), var(--wood));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .menu-card:hover::before {
-            transform: scaleX(1);
+        .menu-card-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                var(--sage-dark) 0%,
+                var(--sage) 25%,
+                var(--wood-medium) 50%,
+                var(--sage-light) 75%,
+                var(--sage-dark) 100%
+            );
+            animation: gradientFlow 8s ease infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gradientFlow {
+            0% { transform: translate(-25%, -25%) rotate(0deg); }
+            50% { transform: translate(-25%, -25%) rotate(180deg); }
+            100% { transform: translate(-25%, -25%) rotate(360deg); }
+        }
+
+        /* Shimmer Effect */
+        .menu-card-bg-shimmer {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Floating Particles */
+        .menu-card-bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .menu-card-bg-particles::before,
+        .menu-card-bg-particles::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .menu-card-bg-particles::before {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .menu-card-bg-particles::after {
+            bottom: 20%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-20px) scale(1.1); opacity: 0.6; }
+        }
+
+        /* Dark Overlay for Text Readability */
+        .menu-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.85) 0%,
+                rgba(0,0,0,0.6) 40%,
+                rgba(0,0,0,0.3) 100%
+            );
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+
+        .menu-card:hover .menu-card-overlay {
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.9) 0%,
+                rgba(0,0,0,0.5) 40%,
+                rgba(0,0,0,0.2) 100%
+            );
+        }
+
+        /* Content Layer */
+        .menu-card-content {
+            position: relative;
+            z-index: 2;
         }
 
         .menu-card:hover {
-            transform: translateY(-10px) !important;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            transform: translateY(-12px) scale(1.03) !important;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.25);
+        }
+
+        .menu-card:hover .menu-card-bg-gradient {
+            animation-duration: 4s;
+        }
+
+        .menu-card:hover .menu-card-icon {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .menu-card-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--sage-light), var(--sage));
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.4s ease;
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
         }
 
-        .menu-card:hover .menu-card-icon {
-            transform: scale(1.1) rotate(5deg);
+        .menu-card-icon svg {
+            stroke: white;
+            width: 28px;
+            height: 28px;
         }
 
         .menu-card h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 0.5rem;
-            color: var(--charcoal);
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .menu-card-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .menu-card-price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--sage);
+            color: rgba(255,255,255,0.85);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
         }
 
         .menu-card-tag {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: var(--wood-light);
-            color: var(--wood-dark);
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            color: white;
             padding: 0.4rem 1rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            border: 1px solid rgba(255,255,255,0.3);
+            z-index: 10;
+        }
+
+        /* Pause animation on hover for better performance */
+        .menu-card:hover .menu-card-bg-gradient {
+            animation-play-state: running;
+        }
+
+        .menu-card:hover .menu-card-bg-shimmer {
+            animation-duration: 1.5s;
+        }
+
+        /* Video background support (for later) */
+        .menu-card-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        /* Feinkost category colors */
+        .menu-card[data-category="feinkost"] .menu-card-bg-gradient {
+            background: linear-gradient(45deg, var(--sage-dark), var(--sage), var(--wood-medium), var(--sage-light), var(--sage-dark));
         }
 
         /* Features Section */
@@ -626,7 +958,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
             position: relative;
         }
 
@@ -674,9 +1005,9 @@
 
         .locations-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -707,9 +1038,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             margin: 0 auto 1.5rem;
             transition: transform 0.3s ease;
+        }
+
+        .location-card-icon svg {
+            stroke: white;
         }
 
         .location-card:hover .location-card-icon {
@@ -762,13 +1096,13 @@
 
         @media (max-width: 1024px) {
             .locations-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr) !important;
             }
         }
 
         @media (max-width: 600px) {
             .locations-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
             }
         }
 
@@ -1098,6 +1432,48 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 900;
+            box-shadow: 0 10px 30px rgba(122, 158, 126, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: var(--sage-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(122, 158, 126, 0.5);
+        }
+
+        .scroll-top svg {
+            stroke: white;
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-top:hover svg {
+            transform: translateY(-3px);
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .about {
@@ -1136,8 +1512,25 @@
                 display: none;
             }
 
+            .hero-wrapper {
+                height: 100vh;
+            }
+
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .hero-tagline {
+                font-size: 0.7rem;
+                letter-spacing: 0.2em;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-content {
+                padding: 0 1.5rem;
             }
 
             .about,
@@ -1149,10 +1542,6 @@
 
             .section-header h2 {
                 font-size: 2.5rem;
-            }
-
-            .menu-categories {
-                flex-wrap: wrap;
             }
 
             .about-stats {
@@ -1182,13 +1571,14 @@
         }
 
         .loading-logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .loading-logo span {
-            color: var(--sage);
+        .loading-logo img {
+            height: 80px;
+            width: auto;
         }
 
         .loading-bar {
@@ -1210,7 +1600,7 @@
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen">
-        <div class="loading-logo">Kaya <span>Feinkost</span></div>
+        <div class="loading-logo"><img src="images/kayalogo-wide.png" alt="Kaya Feinkost"></div>
         <div class="loading-bar">
             <div class="loading-progress"></div>
         </div>
@@ -1218,85 +1608,120 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="index.html" class="logo">Kaya <span>Feinkost</span></a>
+        <a href="index.html" class="logo"><img src="images/kayalogo-wide.png" alt="Kaya Feinkost"></a>
         <ul class="nav-links">
             <li><a href="index.html">Start</a></li>
             <li><a href="spezialitaeten.html">Spezialitäten</a></li>
             <li><a href="qualitaet.html">Qualität</a></li>
             <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="standorte/index.html">Standorte</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg">
-            <div class="hero-bg-shape shape-1"></div>
-            <div class="hero-bg-shape shape-2"></div>
-            <div class="hero-bg-shape shape-3"></div>
-        </div>
-        <div class="hero-content">
-            <p class="hero-tagline">Traditionelle Rezepte · Frische Zutaten</p>
-            <h1 class="hero-title">
-                <span class="word"><span class="word-inner">Aus</span></span>
-                <span class="word"><span class="word-inner">guter</span></span>
-                <span class="word"><span class="word-inner accent">Herkunft</span></span><br>
-                <span class="word"><span class="word-inner">mit</span></span>
-                <span class="word"><span class="word-inner">täglicher</span></span>
-                <span class="word"><span class="word-inner accent">Frische.</span></span>
-            </h1>
-            <div class="hero-subtitle-wrapper">
-                <p class="hero-subtitle">
-                    Erleben Sie die perfekte Verschmelzung von orientalischer Tradition und mediterraner Leichtigkeit.
-                </p>
-                <img src="images/petersilie.png" alt="Petersilie" class="hero-decoration-left">
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" onclick="toggleMobileMenu()">Start</a></li>
+            <li><a href="spezialitaeten.html" onclick="toggleMobileMenu()">Spezialitäten</a></li>
+            <li><a href="qualitaet.html" onclick="toggleMobileMenu()">Qualität</a></li>
+            <li><a href="ueber-uns.html" onclick="toggleMobileMenu()">Über uns</a></li>
+            <li><a href="standorte/index.html" onclick="toggleMobileMenu()">Standorte</a></li>
+            <li><a href="kontakt.html" onclick="toggleMobileMenu()">Kontakt</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section - Video Background -->
+    <div class="hero-wrapper">
+        <section class="hero">
+            <!-- Video Background -->
+            <div class="hero-video-container">
+                <video class="hero-video" autoplay loop playsinline muted>
+                    <source src="videos/kayahero.mp4" type="video/mp4">
+                </video>
+                <div class="hero-video-overlay"></div>
+                <button class="video-sound-toggle" onclick="toggleVideoSound()">
+                    <svg class="sound-off" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                    <svg class="sound-on" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </button>
             </div>
-            <a href="#menu" class="cta-btn magnetic">
-                Entdecken
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
-    </section>
+
+            <!-- Gradient transition to content -->
+            <div class="hero-gradient-accent"></div>
+
+            <!-- Main text content -->
+            <div class="hero-content">
+                                <h1 class="hero-title">
+                    <span class="line"><span class="line-inner">Täglich frisch.</span></span>
+                    <span class="line"><span class="line-inner">Immer <span class="accent">mediterran.</span></span></span>
+                </h1>
+                <p class="hero-subtitle">
+                    Pasten, Antipasti, Oliven, Salate, Börek & mehr — handgemacht nach traditionellen Rezepten. An 7 Standorten in NRW.
+                </p>
+                <a href="#menu" class="cta-btn magnetic">
+                    Unsere Spezialitäten
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="hero-scroll-hint">
+                <span>Scroll</span>
+                <div class="hero-scroll-line"></div>
+            </div>
+        </section>
+    </div>
 
     <!-- Marquee Section -->
     <div class="marquee-section">
         <div class="marquee-content">
-            <div class="marquee-item"><span>*</span> Frische Zutaten</div>
-            <div class="marquee-item"><span>*</span> Handgemacht</div>
-            <div class="marquee-item"><span>*</span> Traditionelle Rezepte</div>
-            <div class="marquee-item"><span>*</span> Premium Qualität</div>
-            <div class="marquee-item"><span>*</span> 100% Halal</div>
-            <div class="marquee-item"><span>*</span> Täglich frisch</div>
-            <div class="marquee-item"><span>*</span> Regionale Partner</div>
-            <div class="marquee-item"><span>*</span> Frische Zutaten</div>
-            <div class="marquee-item"><span>*</span> Handgemacht</div>
-            <div class="marquee-item"><span>*</span> Traditionelle Rezepte</div>
-            <div class="marquee-item"><span>*</span> Premium Qualität</div>
-            <div class="marquee-item"><span>*</span> 100% Halal</div>
-            <div class="marquee-item"><span>*</span> Täglich frisch</div>
-            <div class="marquee-item"><span>*</span> Regionale Partner</div>
+            <div class="marquee-item"><span>—</span> Täglich frisch</div>
+            <div class="marquee-item"><span>—</span> Handgemacht</div>
+            <div class="marquee-item"><span>—</span> Traditionelle Rezepte</div>
+            <div class="marquee-item"><span>—</span> Mediterrane Küche</div>
+            <div class="marquee-item"><span>—</span> 7 Standorte</div>
+            <div class="marquee-item"><span>—</span> Familientradition</div>
+            <div class="marquee-item"><span>—</span> Täglich frisch</div>
+            <div class="marquee-item"><span>—</span> Handgemacht</div>
+            <div class="marquee-item"><span>—</span> Traditionelle Rezepte</div>
+            <div class="marquee-item"><span>—</span> Mediterrane Küche</div>
+            <div class="marquee-item"><span>—</span> 7 Standorte</div>
+            <div class="marquee-item"><span>—</span> Familientradition</div>
         </div>
     </div>
 
     <!-- About Section -->
     <section class="about" id="about">
         <div class="about-image">
-            <img src="images/olivgrün.png" alt="Oliven">
+            <img loading="lazy" src="images/olivgrün.png" alt="Oliven">
             <div class="about-image-frame"></div>
-            <img src="images/chilli.png" alt="Chilli" class="about-image-chilli">
-            <img src="images/olivenöl.png" alt="Olivenöl" class="about-image-overlay">
+            <img loading="lazy" src="images/chilli.png" alt="Chilli" class="about-image-chilli">
+            <img loading="lazy" src="images/olivenöl.png" alt="Olivenöl" class="about-image-overlay">
         </div>
         <div class="about-content">
-            <h2>Zwei Welten, <span>eine Küche</span></h2>
+            <h2>Tradition trifft <span>Feinkost</span></h2>
             <p>
-                Bei Kaya Feinkost verbinden wir das Beste aus zwei kulinarischen Traditionen.
-                Unsere Rezepte werden mit Liebe und höchster Sorgfalt zubereitet – jeden Tag frisch.
+                An unserer Feinkost-Theke finden Sie das Beste der mediterranen und orientalischen Küche.
+                Hausgemachte Pasten, Antipasti, Oliven, Salate, gefüllte Weinblätter — alles täglich frisch zubereitet nach traditionellen Rezepten.
             </p>
             <p>
-                Von handgemachtem Döner mit ausgewählten Gewürzen bis zu cremiger Pasta
-                mit sonnengereiften Tomaten – bei uns schmecken Sie die Leidenschaft.
+                Dazu knuspriges Börek frisch aus dem Ofen, türkisches Simit und hausgemachte Dips.
+                Qualität, die man schmeckt — an 7 Standorten in NRW.
             </p>
             <div class="about-stats">
                 <div class="stat">
@@ -1304,7 +1729,7 @@
                     <span class="stat-label">% Frische Zutaten</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number" data-value="15">0</span>
+                    <span class="stat-number" data-value="50">0</span>
                     <span class="stat-label">+ Jahre Erfahrung</span>
                 </div>
                 <div class="stat">
@@ -1318,76 +1743,116 @@
     <!-- Menu Section -->
     <section class="menu" id="menu">
         <div class="section-header">
-            <h2>Unsere <span>Speisen</span></h2>
-            <p>Handverlesen, frisch zubereitet, unvergesslich im Geschmack</p>
-        </div>
-
-        <div class="menu-categories">
-            <button class="menu-tab active magnetic">Alle</button>
-            <button class="menu-tab magnetic">Döner</button>
-            <button class="menu-tab magnetic">Pasta</button>
-            <button class="menu-tab magnetic">Beilagen</button>
+            <h2>Unsere <span>Spezialitäten</span></h2>
+            <p>Mediterrane Feinkost & türkische Klassiker — täglich frisch zubereitet</p>
         </div>
 
         <div class="menu-grid">
-            <div class="menu-card" data-category="döner">
+            <!-- Feinkost-Theke -->
+            <a href="spezialitaeten.html#pasten" class="menu-card" data-category="feinkost">
+                <span class="menu-card-tag">Hausgemacht</span>
+                <div class="menu-card-bg">
+                    <div class="menu-card-bg-gradient"></div>
+                    <div class="menu-card-bg-shimmer"></div>
+                </div>
+                <div class="menu-card-overlay"></div>
+                <div class="menu-card-content">
+                    <div class="menu-card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+                    </div>
+                    <h3>Pasten & Dips</h3>
+                    <p class="menu-card-desc">Hummus, Baba Ganoush, Muhammara und mehr — cremige Aufstriche nach traditionellen Rezepten</p>
+                </div>
+            </a>
+
+            <a href="spezialitaeten.html#oliven" class="menu-card" data-category="feinkost">
+                <span class="menu-card-tag">Premium</span>
+                <div class="menu-card-bg">
+                    <div class="menu-card-bg-gradient"></div>
+                    <div class="menu-card-bg-shimmer"></div>
+                </div>
+                <div class="menu-card-overlay"></div>
+                <div class="menu-card-content">
+                    <div class="menu-card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="12" rx="4" ry="6"/><path d="M12 6c-2 0-4-2-4-4"/></svg>
+                    </div>
+                    <h3>Marinierte Oliven</h3>
+                    <p class="menu-card-desc">Kalamata, gefüllte Oliven und mehr — handverlesen und in feinem Olivenöl mariniert</p>
+                </div>
+            </a>
+
+            <a href="spezialitaeten.html#antipasti" class="menu-card" data-category="feinkost">
+                <span class="menu-card-tag">Mediterran</span>
+                <div class="menu-card-bg">
+                    <div class="menu-card-bg-gradient"></div>
+                    <div class="menu-card-bg-shimmer"></div>
+                </div>
+                <div class="menu-card-overlay"></div>
+                <div class="menu-card-content">
+                    <div class="menu-card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h10M7 14h6"/></svg>
+                    </div>
+                    <h3>Feine Antipasti</h3>
+                    <p class="menu-card-desc">Gegrillte Paprika, Artischocken, getrocknete Tomaten und mehr — mediterrane Vorspeisen</p>
+                </div>
+            </a>
+
+            <a href="spezialitaeten.html#salate" class="menu-card" data-category="feinkost">
+                <span class="menu-card-tag">Frisch</span>
+                <div class="menu-card-bg">
+                    <div class="menu-card-bg-gradient"></div>
+                    <div class="menu-card-bg-shimmer"></div>
+                </div>
+                <div class="menu-card-overlay"></div>
+                <div class="menu-card-content">
+                    <div class="menu-card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 6c-2 0-4 2-4 6s2 6 4 6 4-2 4-6-2-6-4-6z"/></svg>
+                    </div>
+                    <h3>Frische Salate</h3>
+                    <p class="menu-card-desc">Tabouleh, Couscous-Salat, Krautsalat und mehr — knackig und aromatisch</p>
+                </div>
+            </a>
+
+            <a href="spezialitaeten.html#gebaeck" class="menu-card" data-category="feinkost">
                 <span class="menu-card-tag">Beliebt</span>
-                <div class="menu-card-icon">🥙</div>
-                <h3>Classic Döner</h3>
-                <p class="menu-card-desc">Zartes Dönerfleisch, frisches Gemüse, hausgemachte Saucen im knusprigen Fladenbrot</p>
-                <span class="menu-card-price">€7,50</span>
-            </div>
+                <div class="menu-card-bg">
+                    <div class="menu-card-bg-gradient"></div>
+                    <div class="menu-card-bg-shimmer"></div>
+                </div>
+                <div class="menu-card-overlay"></div>
+                <div class="menu-card-content">
+                    <div class="menu-card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+                    </div>
+                    <h3>Türkisches Gebäck</h3>
+                    <p class="menu-card-desc">Simit, Börek mit Käse oder Spinat — frisch aus dem Ofen</p>
+                </div>
+            </a>
 
-            <div class="menu-card" data-category="pasta">
-                <div class="menu-card-icon">🍝</div>
-                <h3>Pasta Pomodoro</h3>
-                <p class="menu-card-desc">Hausgemachte Pasta mit sonnengereiften Tomaten, frischem Basilikum und Parmigiano</p>
-                <span class="menu-card-price">€9,90</span>
-            </div>
+            <a href="spezialitaeten.html" class="menu-card" data-category="gerichte" style="background: linear-gradient(135deg, var(--sage), var(--sage-dark));">
+                <span class="menu-card-tag">Warme Küche</span>
+                <div class="menu-card-bg">
+                    <div class="menu-card-bg-gradient" style="opacity: 0.2;"></div>
+                    <div class="menu-card-bg-shimmer"></div>
+                </div>
+                <div class="menu-card-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);"></div>
+                <div class="menu-card-content">
+                    <div class="menu-card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M8 6h8M6 10h12M7 14h10M9 18h6"/></svg>
+                    </div>
+                    <h3>Drehspieß & Falafel</h3>
+                    <p class="menu-card-desc">Dürüm, Lahmacun, Teller und mehr — unsere beliebten warmen Gerichte</p>
+                </div>
+            </a>
+        </div>
 
-            <div class="menu-card" data-category="döner">
-                <span class="menu-card-tag">Neu</span>
-                <div class="menu-card-icon">🌯</div>
-                <h3>Döner Bowl</h3>
-                <p class="menu-card-desc">Reis-Bowl mit mariniertem Dönerfleisch, Hummus, Tabouleh und Tahini-Dressing</p>
-                <span class="menu-card-price">€10,50</span>
-            </div>
-
-            <div class="menu-card" data-category="pasta">
-                <div class="menu-card-icon">🍜</div>
-                <h3>Pasta Carbonara</h3>
-                <p class="menu-card-desc">Cremige Carbonara mit Guanciale, Eigelb und frisch geriebenem Pecorino</p>
-                <span class="menu-card-price">€11,90</span>
-            </div>
-
-            <div class="menu-card" data-category="döner">
-                <div class="menu-card-icon">🥗</div>
-                <h3>Döner Salat</h3>
-                <p class="menu-card-desc">Knackiger Salat mit saftigen Dönerstreifen, Feta und Granatapfelkernen</p>
-                <span class="menu-card-price">€8,90</span>
-            </div>
-
-            <div class="menu-card" data-category="pasta">
-                <span class="menu-card-tag">Vegan</span>
-                <div class="menu-card-icon">🥬</div>
-                <h3>Pasta Primavera</h3>
-                <p class="menu-card-desc">Frische Pasta mit saisonalem Gemüse in leichter Olivenöl-Knoblauch-Sauce</p>
-                <span class="menu-card-price">€9,50</span>
-            </div>
-
-            <div class="menu-card" data-category="beilagen">
-                <div class="menu-card-icon">🍟</div>
-                <h3>Pommes Frites</h3>
-                <p class="menu-card-desc">Knusprige Pommes aus frischen Kartoffeln mit hausgemachter Sauce</p>
-                <span class="menu-card-price">€3,50</span>
-            </div>
-
-            <div class="menu-card" data-category="beilagen">
-                <div class="menu-card-icon">🧆</div>
-                <h3>Falafel</h3>
-                <p class="menu-card-desc">Knusprige Kichererbsenbällchen mit Tahini-Dip</p>
-                <span class="menu-card-price">€4,50</span>
-            </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="spezialitaeten.html" class="cta-btn" style="opacity: 1; transform: none;">
+                Alle Spezialitäten entdecken
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
         </div>
     </section>
 
@@ -1400,21 +1865,35 @@
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🌿</div>
-                <h3>Frische Zutaten</h3>
-                <p>Täglich geliefert von regionalen Partnern. Keine Kompromisse bei der Qualität.</p>
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5">
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <h3>Täglich frisch</h3>
+                <p>Jeden Morgen bereiten wir unsere Spezialitäten frisch zu. Qualität ohne Kompromisse.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">👨‍🍳</div>
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5">
+                        <path d="M12 11c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z"/>
+                        <path d="M6 21v-2c0-2.2 1.8-4 4-4h4c2.2 0 4 1.8 4 4v2"/>
+                    </svg>
+                </div>
                 <h3>Handgemacht</h3>
-                <p>Jedes Gericht wird mit Liebe und nach traditionellen Rezepten zubereitet.</p>
+                <p>Jede Spezialität wird von Hand nach traditionellen Familienrezepten zubereitet.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">♻️</div>
-                <h3>Nachhaltig</h3>
-                <p>Umweltbewusstes Handeln ist uns wichtig – von der Verpackung bis zur Beschaffung.</p>
+                <div class="feature-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--sage)" stroke-width="1.5">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <h3>Mit Liebe</h3>
+                <p>Wir legen unser Herzblut in jedes Produkt — das schmeckt man bei jedem Bissen.</p>
             </div>
         </div>
     </section>
@@ -1423,37 +1902,55 @@
     <section class="locations" id="locations">
         <div class="section-header">
             <h2>Unsere <span>Standorte</span></h2>
-            <p>4x in Ihrer Nähe</p>
+            <p>7x in Ihrer Nähe</p>
         </div>
 
-        <div class="locations-grid">
-            <a href="kontakt.html" class="location-card">
-                <div class="location-card-icon">📍</div>
-                <h3>Dormagen</h3>
-                <p>Lübeckerstr. 1</p>
+        <div class="locations-grid" style="grid-template-columns: repeat(5, 1fr);">
+            <a href="standorte/index.html" class="location-card">
+                <div class="location-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h3>Troisdorf</h3>
+                <p>Spicherstr. 101</p>
+                <span style="display:inline-block;margin-top:0.5rem;background:var(--sage);color:white;padding:0.2rem 0.8rem;border-radius:50px;font-size:0.75rem;">2 Filialen</span>
             </a>
 
-            <a href="kontakt.html" class="location-card">
-                <div class="location-card-icon">📍</div>
+            <a href="standorte/index.html" class="location-card">
+                <div class="location-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h3>Sankt Augustin</h3>
+                <p>Rathausallee 16</p>
+                <span style="display:inline-block;margin-top:0.5rem;background:var(--sage);color:white;padding:0.2rem 0.8rem;border-radius:50px;font-size:0.75rem;">2 Filialen</span>
+            </a>
+
+            <a href="standorte/euskirchen-feinkost.html" class="location-card">
+                <div class="location-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
                 <h3>Euskirchen</h3>
                 <p>Roitzheimerstr. 117</p>
             </a>
 
-            <a href="kontakt.html" class="location-card">
-                <div class="location-card-icon">📍</div>
-                <h3>Troisdorf</h3>
-                <p>Speicherstr. 101</p>
+            <a href="standorte/dormagen-feinkost.html" class="location-card">
+                <div class="location-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h3>Dormagen</h3>
+                <p>Lübeckerstr. 1</p>
             </a>
 
-            <a href="kontakt.html" class="location-card">
-                <div class="location-card-icon">📍</div>
-                <h3>Sankt Augustin</h3>
-                <p>Rathausallee 15</p>
+            <a href="standorte/neuss-feinkost.html" class="location-card">
+                <div class="location-card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h3>Neuss</h3>
+                <p>Breslauerstr.</p>
             </a>
         </div>
 
         <div class="locations-cta">
-            <a href="kontakt.html">
+            <a href="standorte/index.html">
                 Alle Standorte & Öffnungszeiten
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1468,26 +1965,32 @@
             <div class="contact-info">
                 <h2>Besuchen Sie <span>uns</span></h2>
                 <p>
-                    Wir freuen uns auf Ihren Besuch! Reservieren Sie einen Tisch
-                    oder bestellen Sie ganz bequem zur Abholung.
+                    Wir freuen uns auf Ihren Besuch! Kommen Sie an unsere Theke
+                    und lassen Sie sich von unserer Vielfalt inspirieren.
                 </p>
                 <div class="contact-details">
                     <div class="contact-item">
-                        <div class="contact-item-icon">📍</div>
+                        <div class="contact-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
                         <div>
-                            <strong>Adresse</strong><br>
-                            Musterstraße 123, 12345 Musterstadt
+                            <strong>7 Standorte</strong><br>
+                            In NRW für Sie da
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-item-icon">📞</div>
+                        <div class="contact-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
                         <div>
-                            <strong>Telefon</strong><br>
-                            +49 123 456 789
+                            <strong>Kontakt</strong><br>
+                            Siehe Standort-Details
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-item-icon">🕐</div>
+                        <div class="contact-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
                         <div>
                             <strong>Öffnungszeiten</strong><br>
                             Mo-Sa: 11:00 - 22:00 Uhr
@@ -1514,6 +2017,13 @@
         </div>
     </section>
 
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" onclick="scrollToTop()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </div>
+
     <!-- Footer -->
     <footer style="background: url('images/holzdunkel.png') center/cover no-repeat;">
         <div class="footer-logo">Kaya <span>Feinkost</span></div>
@@ -1523,7 +2033,7 @@
             <a href="#">Instagram</a>
             <a href="#">Facebook</a>
         </div>
-        <p class="footer-copy">© 2025 Kaya Feinkost. Alle Rechte vorbehalten.</p>
+        <p class="footer-copy">© 2026 Kaya Feinkost. Alle Rechte vorbehalten.</p>
     </footer>
 
     <!-- GSAP & Plugins -->
@@ -1532,16 +2042,17 @@
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
     <script>
-        // Initialize Lenis for smooth scrolling
+        // Initialize Lenis for smooth scrolling - optimized for cinematic feel
         const lenis = new Lenis({
-            duration: 1.2,
+            duration: 1.8,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
-            wheelMultiplier: 1,
-            touchMultiplier: 2,
+            wheelMultiplier: 0.8,
+            touchMultiplier: 1.5,
             infinite: false,
+            lerp: 0.08
         });
 
         function raf(time) {
@@ -1614,95 +2125,68 @@
         });
 
         function initAnimations() {
-            // Hero Background Shapes
-            gsap.to('.hero-bg-shape.shape-1', {
-                opacity: 0.3,
-                duration: 2,
-                ease: 'power2.out'
-            });
+            // ===== HERO VIDEO BACKGROUND - ELEGANT TEXT ANIMATION =====
 
-            gsap.to('.hero-bg-shape.shape-2', {
-                opacity: 0.4,
-                duration: 2,
-                delay: 0.2,
-                ease: 'power2.out'
-            });
+            // Hero intro animation timeline
+            const heroIntro = gsap.timeline({ delay: 4 });
 
-            gsap.to('.hero-bg-shape.shape-3', {
-                opacity: 0.15,
-                duration: 2,
-                delay: 0.4,
-                ease: 'power2.out'
-            });
+            heroIntro
+                // Tagline fades in from below
+                .to('.hero-tagline', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                })
+                // Title lines reveal with stagger
+                .to('.hero-title .line-inner', {
+                    y: 0,
+                    duration: 1.4,
+                    stagger: 0.2,
+                    ease: "power4.out"
+                }, '-=0.6')
+                // Subtitle fades in
+                .to('.hero-subtitle', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                }, '-=0.8')
+                // CTA button
+                .to('.hero .cta-btn', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out"
+                }, '-=0.6')
+                // Scroll hint
+                .to('.hero-scroll-hint', {
+                    opacity: 0.8,
+                    duration: 0.6,
+                    ease: "power2.out"
+                }, '-=0.3');
 
-            // Hero Content Animations
-            const heroTl = gsap.timeline({ delay: 0.3 });
-
-            heroTl.to('.hero-tagline', {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: 'power3.out'
-            })
-            .to('.hero-title .word-inner', {
-                y: 0,
-                duration: 1.2,
-                stagger: 0.08,
-                ease: 'power4.out'
-            }, '-=0.5')
-            .to('.hero-subtitle', {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: 'power3.out'
-            }, '-=0.6')
-            .to('.hero-decoration-left', {
-                opacity: 1,
-                x: 0,
-                rotation: 0,
-                duration: 1.2,
-                ease: 'power3.out'
-            }, '-=0.8')
-            .to('.cta-btn', {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: 'power3.out'
-            }, '-=0.6');
-
-            // Hero Parallax on Scroll
+            // Fade out hero content on scroll
             gsap.to('.hero-content', {
-                y: 200,
                 opacity: 0,
-                ease: 'none',
+                y: -50,
+                ease: "none",
                 scrollTrigger: {
-                    trigger: '.hero',
+                    trigger: '.hero-wrapper',
                     start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1
+                    end: '50% top',
+                    scrub: true
                 }
             });
 
-            // Hero Background Shapes Parallax
-            gsap.to('.hero-bg-shape.shape-1', {
-                y: -100,
-                ease: 'none',
+            // Fade out scroll hint immediately
+            gsap.to('.hero-scroll-hint', {
+                opacity: 0,
                 scrollTrigger: {
-                    trigger: '.hero',
+                    trigger: '.hero-wrapper',
                     start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1.5
-                }
-            });
-
-            gsap.to('.hero-bg-shape.shape-2', {
-                y: 150,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.hero',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1
+                    end: '10% top',
+                    scrub: true
                 }
             });
 
@@ -1814,18 +2298,6 @@
                 scrollTrigger: {
                     trigger: '.menu .section-header',
                     start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                }
-            });
-
-            gsap.to('.menu-categories', {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.menu-categories',
-                    start: 'top 85%',
                     toggleActions: 'play none none reverse'
                 }
             });
@@ -1946,71 +2418,6 @@
             });
         }
 
-        // Menu Tabs Filter
-        const tabs = document.querySelectorAll('.menu-tab');
-        const menuCards = document.querySelectorAll('.menu-card');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Update active tab
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                // Get filter category
-                const filter = tab.textContent.toLowerCase();
-
-                // Separate cards into show/hide arrays
-                const showCards = [];
-                const hideCards = [];
-
-                menuCards.forEach(card => {
-                    const category = card.dataset.category;
-                    if (filter === 'alle' || category === filter) {
-                        showCards.push(card);
-                    } else {
-                        hideCards.push(card);
-                    }
-                });
-
-                // Create timeline for smooth sequencing
-                const tl = gsap.timeline();
-
-                // First hide cards that don't match
-                if (hideCards.length > 0) {
-                    tl.to(hideCards, {
-                        opacity: 0,
-                        y: 20,
-                        scale: 0.95,
-                        duration: 0.3,
-                        stagger: 0.03,
-                        ease: 'power2.inOut',
-                        onComplete: () => {
-                            hideCards.forEach(card => card.style.display = 'none');
-                        }
-                    });
-                }
-
-                // Then show matching cards
-                if (showCards.length > 0) {
-                    tl.add(() => {
-                        showCards.forEach(card => {
-                            card.style.display = 'block';
-                            gsap.set(card, { opacity: 0, y: 30, scale: 0.95 });
-                        });
-                    });
-
-                    tl.to(showCards, {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        duration: 0.5,
-                        stagger: 0.08,
-                        ease: 'power3.out'
-                    }, hideCards.length > 0 ? '-=0.1' : 0);
-                }
-            });
-        });
-
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2024,6 +2431,66 @@
                 }
             });
         });
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.querySelector('.scroll-top');
+
+        ScrollTrigger.create({
+            start: 'top -300',
+            end: 99999,
+            onUpdate: (self) => {
+                if (self.progress > 0) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            }
+        });
+
+        function scrollToTop() {
+            lenis.scrollTo(0, { duration: 2 });
+        }
+
+        // Make scrollToTop available globally
+        window.scrollToTop = scrollToTop;
+
+        // Video Sound Toggle
+        function toggleVideoSound() {
+            const video = document.querySelector('.hero-video');
+            const btn = document.querySelector('.video-sound-toggle');
+            const soundOff = btn.querySelector('.sound-off');
+            const soundOn = btn.querySelector('.sound-on');
+
+            if (video.muted) {
+                video.muted = false;
+                btn.classList.add('unmuted');
+                soundOff.style.display = 'none';
+                soundOn.style.display = 'block';
+            } else {
+                video.muted = true;
+                btn.classList.remove('unmuted');
+                soundOff.style.display = 'block';
+                soundOn.style.display = 'none';
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const nav = document.querySelector('.mobile-nav');
+            const overlay = document.querySelector('.mobile-nav-overlay');
+
+            toggle.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            // Prevent body scroll when menu is open
+            if (nav.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
     </script>
 </body>
 </html>
